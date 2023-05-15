@@ -1,3 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+body {
+  font-size: 16px;
+  background: rgb(59, 137, 180);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  color: white;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+body aside {
+  background: red;
+  column-span: 1/1;
+}
+body aside nav section div {
+  margin: 0.75rem 1rem;
+  align-items: center;
+}
+body aside nav section div h2 {
+  font-size: 1.75rem;
+  margin-left: 0.625rem;
+  text-shadow: 2px 2px 2px black;
+}
+body aside nav section ul {
+  list-style: none;
+  margin-left: 1.5rem;
+}
+body aside nav section ul li {
+  margin-top: 0.5rem;
+}
+body aside nav section ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 0.625rem;
+}
 
 /*# sourceMappingURL=style.css.map */

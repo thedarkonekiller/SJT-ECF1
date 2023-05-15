@@ -1,0 +1,61 @@
+$primaryColor: rgb(38, 38, 38);
+$secondaryColor: rgb(59, 137, 180);
+$bgAside: red;
+$textShadow: 2px 2px 2px black;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+body {
+    font-size: 16px;
+    background: $secondaryColor;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    color: white;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    aside {
+        background: $bgAside;
+        column-span: 1/1;
+        nav {
+            section {
+                div {
+                    margin: .75rem 1rem;
+                    align-items: center;
+                    h2 {
+                        font-size: 1.75rem;
+                        margin-left: .625rem;
+                        text-shadow: $textShadow;
+                    }
+                }
+                ul {
+                    list-style: none;
+                    margin-left: 1.5rem;
+                    li {
+                        margin-top: 0.5rem;
+                        a {
+                            text-decoration: none;
+                            color: white;
+                            font-size: 1.5rem;
+                            margin-left: .625rem;
+                        }
+                    }
+                }
+                }
+            }
+        }
+    }
