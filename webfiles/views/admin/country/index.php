@@ -1,5 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/functions.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/create.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/read.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/delete.php'); ?>
 <?php
         if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']){
