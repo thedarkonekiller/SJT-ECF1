@@ -51,5 +51,8 @@ body aside nav section ul li a {
   font-size: 1.5rem;
   margin-left: 0.625rem;
 }
+body main {
+  column-span: 11/11;
+}
 
 /*# sourceMappingURL=style.css.map */
