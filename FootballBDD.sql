@@ -22,9 +22,9 @@ USE `footballclub`;
 -- Listage de la structure de table footballclub. club
 CREATE TABLE IF NOT EXISTS `club` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `mName` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   `createDate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
-  `desc` float NOT NULL DEFAULT '0',
+  `descrip` float NOT NULL DEFAULT '0',
   `logo` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   `stadiumName` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   `clubs_id` int DEFAULT NULL,
@@ -88,13 +88,28 @@ CREATE TABLE IF NOT EXISTS `league` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
+-- Listage de la structure de table footballclub. playeur
+CREATE TABLE IF NOT EXISTS `playeur` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(200) DEFAULT NULL,
+  `lastName` varchar(200) DEFAULT NULL,
+  `nationality` varchar(200) DEFAULT NULL,
+  `post` varchar(200) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `playeurPic` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Les données exportées n'étaient pas sélectionnées.
+
 -- Listage de la structure de table footballclub. user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `lastName` varchar(200) NOT NULL DEFAULT '0',
   `firstName` varchar(200) NOT NULL DEFAULT '0',
-  `birthDate` date NOT NULL DEFAULT '0000-00-00',
+  `birthDate` date NOT NULL,
   `nationality` varchar(200) NOT NULL DEFAULT '',
+  `post` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `clubs_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_user_clubs` (`clubs_id`),
