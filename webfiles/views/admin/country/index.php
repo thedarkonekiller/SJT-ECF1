@@ -1,35 +1,16 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/functions.php'); ?>
-<?php
-if ($conn): ?>
+
 <main>
     <section>
         <h2>Ajouter un pays</h2>
         <form action="/webfiles/scripts/products/addproduct.php" method="POST" enctype="multipart/form-data">
-            <label for="typeprdct">Type</label>
-            <select name="addProductType" id="typeprdct">
-                <?php foreach ($resultrmt as $name) { ?>
-                    <option value="<?= $name['namematerialtypes'] ?>"><?= $name['namematerialtypes'] ?></option>
-               <?php } ?>
-            </select>
-            <label for="ref">Référence</label>
-            <input type="text" name="addProductReference" id="ref">
-            <label for="prodname">Nom Produit</label>
-            <input type="text" name="addProductName" id="prodname">
-            <label for="prodpic">Image</label>
-            <input type="file" name="addProductPicture" id="prodpic">
-            <label for="proddesccourte">Description courte</label>
-            <textarea name="addProductShortDesc" id="proddesccourte" rows="7" maxlength="255"></textarea>
-            <label for="proddesc">Description</label>
-            <textarea name="addProductLongDesc" id="proddesc" rows="20"></textarea>
-            <label for="prodprice">Prix de revente</label>
-            <input type="number" step="0.01" name="addProductPrice" id="prodprice">
-            <input type="submit" name="addProductButton" value="Enregister">
+            <label for="ref">Nom du pays</label>
+            <input type="text" name="addCountryName" id="countryName">
         </form>
     </section>
         <section class="admArray">
             <h2>Liste des produits</h2>
-            <table class="flex flexColumn">
+            <table class="flex flex-col">
                 <thead>
                     <tr class="flex">
                         <th>Nom du Pays</th>
@@ -38,7 +19,7 @@ if ($conn): ?>
                 </thead>
                 <tbody>
                     <?php
-                    getAll('country');
+                    var_dump(getAll('country'));
                     foreach ($results as $result) { ?>
                         <tr class="flex">
                             <td><?= $result['nameCountry']; ?></td>
@@ -59,4 +40,3 @@ if ($conn): ?>
             </table>
         </section>
 </main>
-<?php endif ?>
