@@ -32,30 +32,21 @@ body {
         background: $bgAside;
         column-span: 1/1;
         nav {
-            section {
                 div {
                     margin: .75rem 1rem;
                     align-items: center;
-                    h2 {
+                    a {
                         font-size: 1.75rem;
                         margin-left: .625rem;
                         text-shadow: $textShadow;
+                        text-decoration: none;
+                        color: white;
                     }
-                }
-                ul {
-                    list-style: none;
-                    margin-left: 1.5rem;
-                    li {
-                        margin-top: 0.5rem;
-                        a {
-                            text-decoration: none;
-                            color: white;
-                            font-size: 1.5rem;
-                            margin-left: .625rem;
-                        }
-                    }
-                }
                 }
             }
         }
+        
+    main {
+        column-span: 11/11;
     }
+}

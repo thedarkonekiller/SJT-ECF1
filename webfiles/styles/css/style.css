@@ -29,27 +29,19 @@ body aside {
   background: red;
   column-span: 1/1;
 }
-body aside nav section div {
+body aside nav div {
   margin: 0.75rem 1rem;
   align-items: center;
 }
-body aside nav section div h2 {
+body aside nav div a {
   font-size: 1.75rem;
   margin-left: 0.625rem;
   text-shadow: 2px 2px 2px black;
-}
-body aside nav section ul {
-  list-style: none;
-  margin-left: 1.5rem;
-}
-body aside nav section ul li {
-  margin-top: 0.5rem;
-}
-body aside nav section ul li a {
   text-decoration: none;
   color: white;
-  font-size: 1.5rem;
-  margin-left: 0.625rem;
+}
+body main {
+  column-span: 11/11;
 }
 
 /*# sourceMappingURL=style.css.map */
