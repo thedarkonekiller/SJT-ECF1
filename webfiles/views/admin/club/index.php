@@ -2,7 +2,7 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>
 <main>
-    <section>
+    <section class="add">
         <h2>Ajouter un club</h2>
         <form class="flex flex-col" action="/webfiles/scripts/admin/create.php" method="POST">
             <label for="clubName">Nom</label>
@@ -18,7 +18,7 @@
             <button type="submit" name="addClub">Ajouter</button>
         </form>
     </section>
-    <section class="admArray">
+    <section class="admArray club">
         <h2>Liste des clubs</h2>
         <table class="flex flex-col">
             <thead>
@@ -42,11 +42,11 @@
                         <td class="flex">
                             <form action="/webfiles/views/admin/club/modify.php" method="POST">
                                 <input type="hidden" name="modifyIdClub" value="<?php echo $result["id"]; ?>">
-                                <button type="submit" name="modifyClub"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="faw" type="submit" name="modifyClub"><i class="fa-solid fa-pen-to-square"></i></button>
                             </form>
                             <form action="/webfiles/scripts/admin/delete.php" method="POST">
                                 <input type="hidden" name="deleteIdClub" value="<?php echo $result["id"]; ?>">
-                                <button type="submit" name="deleteClub"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
+                                <button class="faw" type="submit" name="deleteClub"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                             </form>
                         </td>
                     </tr>

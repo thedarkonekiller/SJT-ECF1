@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']) {
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>
 <main>
-    <section>
+    <section class="add">
         <h2>Ajouter un pays</h2>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="flex flex-col">
             <label for="countryName">Nom</label>
             <input type="text" name="addCountryName" id="countryName">
             <button type="submit" name="addCountry">Ajouter</button>
@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']) {
     </section>
     <section class="admArray">
         <h2>Liste des pays</h2>
-        <table class="flex flex-col">
+        <table>
             <thead>
-                <tr class="flex">
+                <tr>
                     <th>Nom</th>
                     <th>Actions</th>
                 </tr>
@@ -37,16 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']) {
                 <?php
                 $results = getAll('country');
                 foreach ($results as $result) { ?>
-                    <tr class="flex">
+                    <tr>
                      <td><?= $result['name']; ?></td>
                         <td class="flex">
                             <form action="/webfiles/views/admin/country/modify.php" method="POST">
                                 <input type="hidden" name="modifyIdCountry" value="<?php echo $result["id"]; ?>">
-                                <button type="submit" name="modifyCountry"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="faw" type="submit" name="modifyCountry"><i class="fa-solid fa-pen-to-square"></i></button>
                             </form>
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                                 <input type="hidden" name="deleteIdCountry" value="<?php echo $result["id"]; ?>">
-                                <button type="submit" name="deleteCountry"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
+                                <button class="faw" type="submit" name="deleteCountry"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                             </form>
                         </td>
                     </tr>
