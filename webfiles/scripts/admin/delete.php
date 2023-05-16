@@ -72,3 +72,10 @@ function deleteUser(int $id){
         echo 'Erreur: ' . $e->getMessage();
     }
 }
+
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdClub']){
+    $id = $_POST['deleteIdClub'];
+    deleteClub($id);
+    header('Location: /webfiles/views/admin/club');
+}
