@@ -1,6 +1,7 @@
 $primaryColor: rgb(38, 38, 38);
 $secondaryColor: rgb(59, 137, 180);
 $bgAside: red;
+$primaryText: white;
 $textShadow: 2px 2px 2px black;
 
 * {
@@ -48,5 +49,32 @@ body {
         
     main {
         column-span: 11/11;
+        header {
+            max-width: 1440px;
+            width: 100%;
+            nav {
+                .flex {
+                    justify-content: space-between;
+                }
+                >div{
+                    width: 100%;
+                    div {
+                        a {
+                            text-decoration: none;
+                            color: $primaryText;
+                        }
+                    }
+                    ul {
+                        list-style: none;
+                        li {
+                            a {
+                                text-decoration: none;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     }
 }

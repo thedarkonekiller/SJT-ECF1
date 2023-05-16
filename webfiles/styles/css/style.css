@@ -43,5 +43,25 @@ body aside nav div a {
 body main {
   column-span: 11/11;
 }
+body main header {
+  max-width: 1440px;
+  width: 100%;
+}
+body main header nav .flex {
+  justify-content: space-between;
+}
+body main header nav > div {
+  width: 100%;
+}
+body main header nav > div div a {
+  text-decoration: none;
+  color: white;
+}
+body main header nav > div ul {
+  list-style: none;
+}
+body main header nav > div ul li a {
+  text-decoration: none;
+}
 
 /*# sourceMappingURL=style.css.map */
