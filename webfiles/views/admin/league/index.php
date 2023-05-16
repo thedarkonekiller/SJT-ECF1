@@ -17,9 +17,9 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>
 <main>
-    <section>
+    <section class="add">
         <h2>Ajouter une ligue</h2>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="flex flex-col">
             <label for="leagueName">Nom</label>
             <input type="text" name="addLeagueName" id="leagueName">
             <button type="submit" name="addLeague">Ajouter</button>
@@ -27,9 +27,9 @@
     </section>
     <section class="admArray">
         <h2>Liste des ligues</h2>
-        <table class="flex flex-col">
+        <table>
             <thead>
-                <tr class="flex">
+                <tr>
                     <th>Nom</th>
                     <th>Actions</th>
                 </tr>
@@ -38,16 +38,16 @@
                 <?php
                 $results = getAll('league');
                 foreach ($results as $result) { ?>
-                    <tr class="flex">
+                    <tr>
                         <td><?= $result['name']; ?></td>
                         <td class="flex">
                             <form action="/webfiles/views/admin/league/modify.php" method="POST">
                                 <input type="hidden" name="modifyIdLeague" value="<?php echo $result["id"]; ?>">
-                                <button type="submit" name="modifyLeague"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="faw" type="submit" name="modifyLeague"><i class="fa-solid fa-pen-to-square"></i></button>
                             </form>
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                                 <input type="hidden" name="deleteIdLeague" value="<?php echo $result["id"]; ?>">
-                                <button type="submit" name="deleteLeague"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
+                                <button class="faw" type="submit" name="deleteLeague"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                             </form>
                         </td>
                     </tr>

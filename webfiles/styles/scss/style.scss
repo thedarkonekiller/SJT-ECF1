@@ -1,8 +1,11 @@
 $primaryColor: rgb(38, 38, 38);
 $secondaryColor: rgb(59, 137, 180);
 $bgAside: red;
+$primaryBg: black;
 $primaryText: white;
 $textShadow: 2px 2px 2px black;
+$boxShadow: 2px 2px 2px white, -2px -2px 2px white;
+$boxShadowHover: inset 2px 2px 2px white, inset -2px -2px 2px white;
 
 * {
     margin: 0;
@@ -48,33 +51,134 @@ body {
         }
         
     main {
-        column-span: 11/11;
-        header {
-            max-width: 1440px;
-            width: 100%;
-            nav {
-                .flex {
-                    justify-content: space-between;
+        grid-column-start: 2;
+        grid-column-end: 13;
+        section {
+            &.add {
+                background: $primaryBg;
+                width: 50%;
+                margin: 0 auto;
+                label {
+                    margin-left: 1rem;
                 }
-                >div{
-                    width: 100%;
-                    div {
-                        a {
-                            text-decoration: none;
-                            color: $primaryText;
-                        }
+                input, textarea {
+                    margin: 1rem;
+                }
+                button {
+                    margin: 0 auto 1rem;
+                    background: $primaryColor;
+                    color: $primaryText;
+                    box-shadow: $boxShadow;
+                    width: 50%;
+                    padding: .625rem 0;
+                    &:hover {
+                        box-shadow: $boxShadowHover;
                     }
-                    ul {
-                        list-style: none;
-                        li {
-                            a {
-                                text-decoration: none;
+                }
+            }
+            &.admArray {
+                background: $primaryBg;
+                width: 50%;
+                margin: 0 auto;
+                table {
+                    width: 100%;
+                    thead {
+                        tr{
+                            th{
+                                &:nth-of-type(1) {
+                                    width: 66%;
+                                }
+                                &:nth-of-type(2) {
+                                    width: 33%;
+                                }
                             }
                         }
                     }
-
+                    tbody {
+                        tr {
+                            td {
+                                &:nth-of-type(1) {
+                                    width: 66%;
+                                    text-align: center;
+                                }
+                                &:nth-of-type(2) {
+                                    width: 33%;
+                                    justify-content: center;
+                                    margin: 0 auto;
+                                }
+                            }
+                        }
+                    }
+                }
+                button.faw {
+                    background: transparent;
+                    color: $primaryText;
+                }
+                &.club {
+                    width: 70%;
+                    table {
+                        width: 100%;
+                        thead {
+                            tr{
+                                th{
+                                    &:nth-of-type(1) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                    &:nth-of-type(2) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                    &:nth-of-type(3) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                    &:nth-of-type(4) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                    &:nth-of-type(5) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                }
+                            }
+                        }
+                        tbody {
+                            tr {
+                                td {
+                                    &:nth-of-type(1) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                    &:nth-of-type(2) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                    &:nth-of-type(3) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                    &:nth-of-type(4) {
+                                        width: 20%;
+                                        text-align: center;
+                                    }
+                                    &:nth-of-type(5) {
+                                        width: 20%;
+                                        justify-content: center;
+                                        margin: 0 auto;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
+            h2 {
+                margin: 1.125rem 0;
+                text-align: center;
+            }
+            
         }
     }
 }

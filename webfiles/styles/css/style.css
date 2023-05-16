@@ -41,27 +41,108 @@ body aside nav div a {
   color: white;
 }
 body main {
-  column-span: 11/11;
+  grid-column-start: 2;
+  grid-column-end: 13;
 }
-body main header {
-  max-width: 1440px;
+body main section.add {
+  background: black;
+  width: 50%;
+  margin: 0 auto;
+}
+body main section.add label {
+  margin-left: 1rem;
+}
+body main section.add input, body main section.add textarea {
+  margin: 1rem;
+}
+body main section.add button {
+  margin: 0 auto 1rem;
+  background: rgb(38, 38, 38);
+  color: white;
+  box-shadow: 2px 2px 2px white, -2px -2px 2px white;
+  width: 50%;
+  padding: 0.625rem 0;
+}
+body main section.add button:hover {
+  box-shadow: inset 2px 2px 2px white, inset -2px -2px 2px white;
+}
+body main section.admArray {
+  background: black;
+  width: 50%;
+  margin: 0 auto;
+}
+body main section.admArray table {
   width: 100%;
 }
-body main header nav .flex {
-  justify-content: space-between;
+body main section.admArray table thead tr th:nth-of-type(1) {
+  width: 66%;
 }
-body main header nav > div {
-  width: 100%;
+body main section.admArray table thead tr th:nth-of-type(2) {
+  width: 33%;
 }
-body main header nav > div div a {
-  text-decoration: none;
+body main section.admArray table tbody tr td:nth-of-type(1) {
+  width: 66%;
+  text-align: center;
+}
+body main section.admArray table tbody tr td:nth-of-type(2) {
+  width: 33%;
+  justify-content: center;
+  margin: 0 auto;
+}
+body main section.admArray button.faw {
+  background: transparent;
   color: white;
 }
-body main header nav > div ul {
-  list-style: none;
+body main section.admArray.club {
+  width: 70%;
 }
-body main header nav > div ul li a {
-  text-decoration: none;
+body main section.admArray.club table {
+  width: 100%;
+}
+body main section.admArray.club table thead tr th:nth-of-type(1) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table thead tr th:nth-of-type(2) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table thead tr th:nth-of-type(3) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table thead tr th:nth-of-type(4) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table thead tr th:nth-of-type(5) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table tbody tr td:nth-of-type(1) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table tbody tr td:nth-of-type(2) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table tbody tr td:nth-of-type(3) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table tbody tr td:nth-of-type(4) {
+  width: 20%;
+  text-align: center;
+}
+body main section.admArray.club table tbody tr td:nth-of-type(5) {
+  width: 20%;
+  justify-content: center;
+  margin: 0 auto;
+}
+body main section h2 {
+  margin: 1.125rem 0;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */
