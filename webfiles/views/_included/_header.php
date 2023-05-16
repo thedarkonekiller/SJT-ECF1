@@ -25,11 +25,11 @@
                         <a href="">Déconnexion</a>
                     </div>
                     <ul class="flex">
-                        <li><a href=""></a>Accueil</li>
-                        <li><a href=""></a>Pays</li>
-                        <li><a href=""></a>Ligues</li>
-                        <li><a href=""></a>Clubs</li>
-                        <li><a href=""></a>Joueurs</li>
+                        <li><a href="">Accueil</a></li>
+                        <li><a href="">Pays</a></li>
+                        <li><a href="">Ligues</a></li>
+                        <li><a href="">Clubs</a></li>
+                        <li><a href="">Joueurs</a></li>
                     </ul>
                 </div>
             </nav>
