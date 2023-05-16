@@ -1,23 +1,89 @@
 <?php
- require_once('./dbConnect.php');
 
-   
- if($conn){
 
-  
-    $firstName = $_POST["firstName"];
-    $lastName = $_POST["lastName"];
-    $nationalite = $_POST["nationalite"];
-    $poste = $_POST["poste"];
-    $birthday = $_POST["birthday"];
-    $playerPic = $_POST["playerPic"];
 
-    $req = "UPDATE user SET firstName = '$firstName', lastName = '$lastName', nationalité = '$nationalite', poste = '$poste', birthday = '$birthday' WHERE playeurPic = $playerPic";
+    function updateCountry(string $name){
+        // On importe le fichier de connexion à la base de donnée
+        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
+    
+        // On prépare la requête et la variable name
+        $sql = "UPDATE country SET name = '$name'";
+    
+        // On execute la requête
+        try {
+            $req = $conn->prepare($sql);
+            $req->bindParam(':name', $name, PDO::PARAM_STR);
+            $req->execute();
+            
+        } catch (Exception $e) {
+            //On affiche un message en cas d'erreur
+            echo 'Erreur: ' . $e->getMessage();
+        }
+    }
+ 
+    function updateLeague(string $name){
+        // On importe le fichier de connexion à la base de donnée
+        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
+    
+        // On prépare la requête et la variable name
+        $sql = "UPDATE league SET name = '$name'";
+    
+        // On execute la requête
+        try {
+            $req = $conn->prepare($sql);
+            $req->bindParam(':name', $name, PDO::PARAM_STR);
+            $req->execute();
+            
+        } catch (Exception $e) {
+            //On affiche un message en cas d'erreur
+            echo 'Erreur: ' . $e->getMessage();
+        }
+    }
 
-    $exec = $conn->query($req);
-}
-else{
-    // Connexion à la BDD n'a pas fonctionnée
-}
+
+    function updateClub(string $name){
+        // On importe le fichier de connexion à la base de donnée
+        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
+    
+        // On prépare la requête et la variable name
+        $sql = "UPDATE club SET name = '$name'";
+    
+        // On execute la requête
+        try {
+            $req = $conn->prepare($sql);
+            $req->bindParam(':name', $name, PDO::PARAM_STR);
+            $req->execute();
+            
+        } catch (Exception $e) {
+            //On affiche un message en cas d'erreur
+            echo 'Erreur: ' . $e->getMessage();
+        }
+    }
+
+
+    function updateUser(string $name){
+        // On importe le fichier de connexion à la base de donnée
+        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
+    
+        // On prépare la requête et la variable name
+        $sql = "UPDATE user SET name = '$name'";
+    
+        // On execute la requête
+        try {
+            $req = $conn->prepare($sql);
+            $req->bindParam(':name', $name, PDO::PARAM_STR);
+            $req->execute();
+            
+        } catch (Exception $e) {
+            //On affiche un message en cas d'erreur
+            echo 'Erreur: ' . $e->getMessage();
+        }
+    }
+
+
+
+
+
+
+
 ?>
-  
