@@ -43,11 +43,7 @@
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-<<<<<<< HEAD
-        $sql = "UPDATE club SET name = '$namee', createDate = '$updateDate', descrip = '$description', logo = '$logo', stadiumName = '$stadium'";
-=======
-        $sql = "UPDATE club SET name = :name";
->>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
+        $sql = "UPDATE club SET name = '$name', createDate = '$updateDate', descrip = '$description', logo = '$logo', stadiumName = '$stadium'";
     
         // On execute la requête
         try {
@@ -71,11 +67,7 @@
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-<<<<<<< HEAD
         $sql = "UPDATE user SET name = '$name', birthDate = '$birthday', nationality = '$nationality', post = '$poste'";
-=======
-        $sql = "UPDATE user SET name = :name";
->>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
     
         // On execute la requête
         try {
@@ -116,17 +108,6 @@
             echo 'Erreur: ' . $e->getMessage();
         }
     }
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-?>
-=======
     
 if($_POST && $_POST['updateNameCountry']){
     $name = $_POST['updateNameCountry'];
@@ -138,4 +119,3 @@ if($_POST && $_POST['updateNameLeague']){
     updateLeague($name);
     header('Location: /webfiles/views/admin/league');
 }
->>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
