@@ -15,16 +15,13 @@
    
         <header class="flex">
             <nav class="flex">
-                <img src="" alt="">
-                <div class="flex flex-col">
-                    <div class="flex">
-                        <a href="">Connexion</a>
-                        <a href="">Inscription</a>
-                        <a href="">Administration</a>
-                        <a href="">Profil</a>
-                        <a href="">Déconnexion</a>
-                    </div>
+ 
+
+               
+    
+                   
                     <ul class="flex">
+                        <img src="/balloncuir.svg" alt="Image du ballon sur le header">
                         <li><a href="../../../index.php">Accueil</a></li>
                         <li><a href="../../../pagePays.php">Pays</a></li>
                         <li><a href="">Ligues</a></li>
