@@ -17,7 +17,7 @@
     $exec = $conn->query($req);
 }
 else{
-    // Connexion à la BDD n'a pas fonctionnée
+   echo "La modification n'a pas fonctionné";
 }
 ?>
   
