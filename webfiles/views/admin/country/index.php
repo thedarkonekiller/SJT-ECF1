@@ -40,10 +40,6 @@
             <button type="submit" name="updateCountry">Modifier</button>
         </form>
     </section>
-        <section class="admArray">
-            <h2>Liste des pays</h2>
-            <table class="flex flex-col">
-                <thead>
     <section class="admArray">
         <h2>Liste des pays</h2>
         <table class="flex flex-col">

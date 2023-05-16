@@ -25,8 +25,8 @@
                         <a href="">Déconnexion</a>
                     </div>
                     <ul class="flex">
-                        <li><a href="">Accueil</a></li>
-                        <li><a href="">Pays</a></li>
+                        <li><a href="../../../index.php">Accueil</a></li>
+                        <li><a href="../../../pagePays.php">Pays</a></li>
                         <li><a href="">Ligues</a></li>
                         <li><a href="">Clubs</a></li>
                         <li><a href="">Joueurs</a></li>
