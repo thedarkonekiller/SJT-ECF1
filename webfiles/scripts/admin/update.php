@@ -23,7 +23,7 @@
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-        $sql = "UPDATE league SET name = '$name'";
+        $sql = "UPDATE league SET name = :name";
     
         // On execute la requête
         try {
@@ -43,7 +43,7 @@
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-        $sql = "UPDATE club SET name = '$name'";
+        $sql = "UPDATE club SET name = :name";
     
         // On execute la requête
         try {
@@ -63,7 +63,7 @@
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-        $sql = "UPDATE user SET name = '$name'";
+        $sql = "UPDATE user SET name = :name";
     
         // On execute la requête
         try {
@@ -81,4 +81,9 @@ if($_POST && $_POST['updateNameCountry']){
     $name = $_POST['updateNameCountry'];
     updateCountry($name);
     header('Location: /webfiles/views/admin/country');
+}
+if($_POST && $_POST['updateNameLeague']){
+    $name = $_POST['updateNameLeague'];
+    updateLeague($name);
+    header('Location: /webfiles/views/admin/league');
 }

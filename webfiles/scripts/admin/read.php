@@ -38,3 +38,45 @@ function getByIdCountry(int $id){
             echo 'Erreur: ' . $e->getMessage();
         }
     }
+    
+
+function getByIdLeague(int $id){
+
+    require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
+        
+        $sql = "SELECT * FROM league WHERE id = :id";
+
+        try {
+            $query = $conn->prepare($sql);
+            $query->bindParam(':id', $id, PDO::PARAM_INT);
+            $results = $query->execute();
+            $results = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $results;
+
+        } catch (Exception $e) {
+            //On affiche un message en cas d'erreur
+            echo 'Erreur: ' . $e->getMessage();
+        }
+    }
+    
+
+    function getByIdClub(int $id){
+    
+        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
+            
+            $sql = "SELECT * FROM club WHERE id = :id";
+    
+            try {
+                $query = $conn->prepare($sql);
+                $query->bindParam(':id', $id, PDO::PARAM_INT);
+                $results = $query->execute();
+                $results = $query->fetch(PDO::FETCH_ASSOC);
+    
+                return $results;
+    
+            } catch (Exception $e) {
+                //On affiche un message en cas d'erreur
+                echo 'Erreur: ' . $e->getMessage();
+            }
+        }

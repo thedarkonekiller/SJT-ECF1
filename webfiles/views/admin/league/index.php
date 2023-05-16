@@ -3,30 +3,30 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/delete.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/update.php'); ?>
 <?php
-        if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']){
-            $name = $_POST['addCountryName'];
-            createCountry($name);
-            header('Location: /webfiles/views/admin/country');
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addLeagueName']){
+            $name = $_POST['addLeagueName'];
+            createLeague($name);
+            header('Location: /webfiles/views/admin/league');
         }
-        elseif($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdCountry']){
-            $id = $_POST['deleteIdCountry'];
-            deleteCountry($id);
-            header('Location: /webfiles/views/admin/country');
+        elseif($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdLeague']){
+            $id = $_POST['deleteIdLeague'];
+            deleteLeague($id);
+            header('Location: /webfiles/views/admin/league');
         }
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>
 <main>
     <section>
-        <h2>Ajouter un pays</h2>
+        <h2>Ajouter une ligue</h2>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
-            <label for="countryName">Nom</label>
-            <input type="text" name="addCountryName" id="countryName">
-            <button type="submit" name="addCountry">Ajouter</button>
+            <label for="leagueName">Nom</label>
+            <input type="text" name="addLeagueName" id="leagueName">
+            <button type="submit" name="addLeague">Ajouter</button>
         </form>
     </section>
     <section class="admArray">
-        <h2>Liste des pays</h2>
+        <h2>Liste des ligues</h2>
         <table class="flex flex-col">
             <thead>
                 <tr class="flex">
@@ -36,18 +36,18 @@
             </thead>
             <tbody>
                 <?php
-                $results = getAll('country');
+                $results = getAll('league');
                 foreach ($results as $result) { ?>
                     <tr class="flex">
                         <td><?= $result['name']; ?></td>
                         <td class="flex">
-                            <form action="/webfiles/views/admin/country/modify.php" method="POST">
-                                <input type="hidden" name="modifyIdCountry" value="<?php echo $result["id"]; ?>">
-                                <button type="submit" name="modifyCountry"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <form action="/webfiles/views/admin/league/modify.php" method="POST">
+                                <input type="hidden" name="modifyIdLeague" value="<?php echo $result["id"]; ?>">
+                                <button type="submit" name="modifyLeague"><i class="fa-solid fa-pen-to-square"></i></button>
                             </form>
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                                <input type="hidden" name="deleteIdCountry" value="<?php echo $result["id"]; ?>">
-                                <button type="submit" name="deleteCountry"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
+                                <input type="hidden" name="deleteIdLeague" value="<?php echo $result["id"]; ?>">
+                                <button type="submit" name="deleteLeague"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                             </form>
                         </td>
                     </tr>
