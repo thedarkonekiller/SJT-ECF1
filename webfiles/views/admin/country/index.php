@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/create.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/read.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/delete.php'); ?>
@@ -11,6 +14,7 @@
         }
         elseif($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdCountry']){
             $id = $_POST['deleteIdCountry'];
+<<<<<<< HEAD
             var_dump($name);
             deleteCountry($name);
             header('Location: /webfiles/views/admin/country');
@@ -36,6 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']) {
     header('Location: /webfiles/views/admin/country');
 }
 
+=======
+            deleteCountry($id);
+            header('Location: /webfiles/views/admin/country');
+        }
+>>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>
@@ -43,10 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']) {
     <section>
         <h2>Ajouter un pays</h2>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
-            <label for="countryName">Nom du pays</label>
+            <label for="countryName">Nom</label>
             <input type="text" name="addCountryName" id="countryName">
             <button type="submit" name="addCountry">Ajouter</button>
         </form>
+<<<<<<< HEAD
     </section> 
     <section>
     <h2>Modifier un pays</h2>
@@ -60,10 +70,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']) {
             <h2>Liste des pays</h2>
             <table class="flex flex-col">
                 <thead>
+=======
+    </section>
+    <section class="admArray">
+        <h2>Liste des pays</h2>
+        <table class="flex flex-col">
+            <thead>
+                <tr class="flex">
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $results = getAll('country');
+                foreach ($results as $result) { ?>
+>>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
                     <tr class="flex">
                      <td><?= $result['name']; ?></td>
                         <td class="flex">
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                            <form action="/webfiles/views/admin/country/modify.php" method="POST">
                                 <input type="hidden" name="modifyIdCountry" value="<?php echo $result["id"]; ?>">
                                 <button type="submit" name="modifyCountry"><i class="fa-solid fa-pen-to-square"></i></button>
                             </form>

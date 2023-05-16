@@ -1,13 +1,10 @@
 <?php
-
-
-
     function updateCountry(string $name){
         // On importe le fichier de connexion à la base de donnée
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-        $sql = "UPDATE country SET name = '$name'";
+        $sql = "UPDATE country SET name = :name";
     
         // On execute la requête
         try {
@@ -26,7 +23,7 @@
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-        $sql = "UPDATE league SET name = '$name'";
+        $sql = "UPDATE league SET name = :name";
     
         // On execute la requête
         try {
@@ -46,7 +43,11 @@
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
+<<<<<<< HEAD
         $sql = "UPDATE club SET name = '$namee', createDate = '$updateDate', descrip = '$description', logo = '$logo', stadiumName = '$stadium'";
+=======
+        $sql = "UPDATE club SET name = :name";
+>>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
     
         // On execute la requête
         try {
@@ -70,7 +71,11 @@
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
+<<<<<<< HEAD
         $sql = "UPDATE user SET name = '$name', birthDate = '$birthday', nationality = '$nationality', post = '$poste'";
+=======
+        $sql = "UPDATE user SET name = :name";
+>>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
     
         // On execute la requête
         try {
@@ -111,6 +116,7 @@
             echo 'Erreur: ' . $e->getMessage();
         }
     }
+<<<<<<< HEAD
 
 
 
@@ -120,3 +126,16 @@
 
 
 ?>
+=======
+    
+if($_POST && $_POST['updateNameCountry']){
+    $name = $_POST['updateNameCountry'];
+    updateCountry($name);
+    header('Location: /webfiles/views/admin/country');
+}
+if($_POST && $_POST['updateNameLeague']){
+    $name = $_POST['updateNameLeague'];
+    updateLeague($name);
+    header('Location: /webfiles/views/admin/league');
+}
+>>>>>>> e913c390848a3b132d51b7fb838744b89397a80f
