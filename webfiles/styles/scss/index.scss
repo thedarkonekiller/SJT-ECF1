@@ -40,11 +40,25 @@ a:hover{
 }
 }
 main{
+    h1{
+        text-align: center;
+    }
+    .allcard{
+        border: solid 5px white;
+        background-color: blanchedalmond;
+        margin-top: 3rem;
+    }
+    .firstCard, .secondCard{
+        display: flex;
+        justify-content: center;
+    }
+ h2{
+        text-align: center;
+    }
 .card{
     padding: 1.5rem;
     border-right:solid 1px #D5D8D8;
     border-bottom: solid 1px #D5D8D8;
-
  img{
     margin: 2rem 0;
     width: 100%;
@@ -52,6 +66,5 @@ main{
     object-fit: contain;
     transition: 0.15;
 }
-
 }
 }
