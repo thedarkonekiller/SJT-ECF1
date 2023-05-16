@@ -86,4 +86,12 @@
 
 
 
+<<<<<<< HEAD
+=======
+    $exec = $conn->query($req);
+}
+else{
+   echo "La modification n'a pas fonctionné";
+}
+>>>>>>> b70048296953f2b40dd72a86fe5c62766617111f
 ?>
