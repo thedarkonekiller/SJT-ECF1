@@ -15,6 +15,15 @@
             <input type="url" name="addClubImage" id="clubImg">
             <label for="clubStadium">Stade</label>
             <input type="text" name="addClubStadium" id="clubStadium">
+            <label for="clubLeague">Ligue</label>
+            <select name="addClubLeague" id="clubLeague">
+                <option value="" selected disabled>Choisissez une ligue</option>
+                <?php 
+                $leagues = getAll('league');
+                foreach ($leagues as $league): ?>
+                    <option value="<?= $league['id'] ?>"><?= $league['name'] ?></option>
+                <?php endforeach; ?>
+            </select>
             <button type="submit" name="addClub">Ajouter</button>
         </form>
     </section>

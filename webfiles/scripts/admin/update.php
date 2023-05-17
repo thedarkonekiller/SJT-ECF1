@@ -41,12 +41,12 @@ error_reporting(E_ALL);
     }
 
 
-    function updateClub(int $id, string $name, string $createDate, string $descrip, string $logo, string $stadium) {
+    function updateClub(int $id, string $name, string $createDate, string $descrip, string $logo, string $stadium, int $league) {
         // On importe le fichier de connexion à la base de donnée
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-        $sql = "UPDATE club SET name = :name, createDate = :createDate, descrip = :descrip, logo = :logo, stadiumName = :stadium WHERE id = :id";
+        $sql = "UPDATE club SET name = :name, createDate = :createDate, descrip = :descrip, logo = :logo, stadiumName = :stadium, league_id = :leagueId WHERE id = :id";
     
         // On execute la requête
         try {
@@ -57,6 +57,7 @@ error_reporting(E_ALL);
             $req->bindParam(':descrip', $descrip, PDO::PARAM_STR);
             $req->bindParam(':logo', $logo, PDO::PARAM_STR);
             $req->bindParam(':stadium', $stadium, PDO::PARAM_STR);
+            $req->bindParam(':leagueId', $league, PDO::PARAM_INT);
             $req->execute();
         } catch (Exception $e) {
             // On affiche un message en cas d'erreur
@@ -130,7 +131,8 @@ elseif($_POST && $_POST['updateNameClub']){
     $descrip = $_POST['updateClubDescription'];
     $logo = $_POST['updateClubImage'];
     $stadium = $_POST['updateClubStadium'];
-    updateClub($id, $name, $createDate, $descrip, $logo, $stadium);
+    $league = $_POST['updateClubLeague'];
+    updateClub($id, $name, $createDate, $descrip, $logo, $stadium, $league);
     header('Location: /webfiles/views/admin/club');
 
 }

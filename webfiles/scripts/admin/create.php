@@ -38,12 +38,12 @@ function createLeague(string $league){
     }
 }
 
-function createClub(string $name, string $createClub, string $descClub, string $imgClub, string $locStade){
+function createClub(string $name, string $createClub, string $descClub, string $imgClub, string $locStade, int $leagueId){
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
     // On prépare la requête et les variables nameclub, createclub, locstade, imgclub, desclub.
-    $sql = "INSERT INTO club(name, createDate, descrip, logo, stadiumName) VALUES (:name , :createClub, :descClub, :imgClub, :locStade)";
+    $sql = "INSERT INTO club(name, createDate, descrip, logo, stadiumName, league_id) VALUES (:name , :createClub, :descClub, :imgClub, :locStade, :leagueId)";
 
     // On execute la requête
     try {
@@ -53,6 +53,7 @@ function createClub(string $name, string $createClub, string $descClub, string $
         $req->bindParam(':descClub', $descClub, PDO::PARAM_STR);
         $req->bindParam(':imgClub', $imgClub, PDO::PARAM_STR);
         $req->bindParam(':locStade', $locStade, PDO::PARAM_STR);
+        $req->bindParam(':leagueId', $leagueId, PDO::PARAM_INT);
         $req->execute();
         
     } catch (Exception $e) {
@@ -94,6 +95,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addClubName']){
     $descClub = $_POST['addClubDescription'];
     $imgClub = $_POST['addClubImage'];
     $locStade = $_POST['addClubStadium'];
-    createClub($name, $createClub, $descClub, $imgClub, $locStade);
+    $leagueId = $_POST['addClubLeague'];
+    createClub($name, $createClub, $descClub, $imgClub, $locStade, $leagueId);
     header('Location: /webfiles/views/admin/club');
 }

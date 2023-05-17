@@ -22,6 +22,19 @@ $arrayClub = getByIdClub($id);
             <input type="url" name="updateClubImage" id="clubImg" value="<?= $arrayClub['logo'] ?>">
             <label for="clubStadium">Stade</label>
             <input type="text" name="updateClubStadium" id="clubStadium" value="<?= $arrayClub['stadiumName'] ?>">
+            <label for="clubLeague">Ligue</label>
+            <select name="updateClubLeague" id="clubLeague">
+                <option value="" selected disabled>
+                <?php 
+                $league = getByIdLeague($arrayClub['league_id']);
+                echo $league['name'];
+                ?></option>
+                <?php 
+                $leagues = getAll('league');
+                foreach ($leagues as $league): ?>
+                    <option value="<?= $league['id'] ?>"><?= $league['name'] ?></option>
+                <?php endforeach; ?>
+            </select>
             <button type="submit" name="updateClub">Modifier</button>
         </form>
     </section>
