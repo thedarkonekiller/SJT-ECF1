@@ -38,12 +38,12 @@ function createLeague(string $league){
     }
 }
 
-function createClub(string $name, string $createClub, string $descClub, string $imgClub, string $locStade, int $leagueId){
+function createClub(string $name, string $createClub, string $descClub, string $imgClub, string $Stade, int $leagueId){
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
     // On prépare la requête et les variables nameclub, createclub, locstade, imgclub, desclub.
-    $sql = "INSERT INTO club(name, createDate, descrip, logo, stadiumName, league_id) VALUES (:name , :createClub, :descClub, :imgClub, :locStade, :leagueId)";
+    $sql = "INSERT INTO club(name, createDate, descrip, logo, stadiumName, league_id) VALUES (:name , :createClub, :descClub, :imgClub, :Stade, :leagueId)";
 
     // On execute la requête
     try {
@@ -52,7 +52,7 @@ function createClub(string $name, string $createClub, string $descClub, string $
         $req->bindParam(':createClub', $createClub, PDO::PARAM_STR);
         $req->bindParam(':descClub', $descClub, PDO::PARAM_STR);
         $req->bindParam(':imgClub', $imgClub, PDO::PARAM_STR);
-        $req->bindParam(':locStade', $locStade, PDO::PARAM_STR);
+        $req->bindParam(':Stade', $Stade, PDO::PARAM_STR);
         $req->bindParam(':leagueId', $leagueId, PDO::PARAM_INT);
         $req->execute();
         
@@ -94,8 +94,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addClubName']){
     $createClub = $_POST['addCludCreatedDate'];
     $descClub = $_POST['addClubDescription'];
     $imgClub = $_POST['addClubImage'];
-    $locStade = $_POST['addClubStadium'];
+    $Stade = $_POST['addClubStadium'];
     $leagueId = $_POST['addClubLeague'];
-    createClub($name, $createClub, $descClub, $imgClub, $locStade, $leagueId);
+    createClub($name, $createClub, $descClub, $imgClub, $Stade, $leagueId);
     header('Location: /webfiles/views/admin/club');
+}
+if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addLeagueName']){
+    $name = $_POST['addLeagueName'];
+    createLeague($name);
+    header('Location: /webfiles/views/admin/league');
 }
