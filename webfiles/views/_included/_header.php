@@ -11,14 +11,14 @@
     <script src="https://kit.fontawesome.com/b94fcc4ff9.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="flex">
+<body>
         <header class="flex">
             <img src="/assets/img/balloncuir.svg" alt="Image du ballon sur le header">
             <div class="flex flex-col">
                 <?php if(!$_SESSION) : ?>
                 <div class="flex usermenu">
                     <a href="/webfiles/views/user/connexion.php">Connexion</a>
-                    <a href="/webfiles/views/user/sigup.php">Inscription</a>
+                    <a href="/webfiles/views/user/signup.php">Inscription</a>
                 </div>
                 <?php endif; ?>
                 <?php if($_SESSION) : ?>

@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/create.php');
-if ($db) {
+if ($conn) {
       if ($_POST) {
             if (empty(Validator($_POST))) {
                   if ($_POST['userName'] && $_POST['firstName'] && $_POST['lastName'] && $_POST['email'] && $_POST['password'] && isset($_POST['userName'], $_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'])) {
