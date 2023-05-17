@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -12,24 +12,33 @@
 </head>
 
 <body class="flex">
-   
         <header class="flex">
-            <nav class="flex">
- 
-
-               
-    
-                   
-                    <ul class="flex">
-                        <img src="/balloncuir.svg" alt="Image du ballon sur le header">
-                        <li><a href="../../../index.php">Accueil</a></li>
-                        <li><a href="../../../pagePays.php">Pays</a></li>
-                        <li><a href="">Ligues</a></li>
-                        <li><a href="">Clubs</a></li>
-                        <li><a href="">Joueurs</a></li>
-                        <li><a href="">Connexion</a></li>
-                    </ul>
-   
-            </nav>
+            <img src="/assets/img/balloncuir.svg" alt="Image du ballon sur le header">
+            <div class="flex flex-col">
+                <?php if(!$_SESSION) : ?>
+                <div class="flex usermenu">
+                    <a href="/webfiles/views/user/connexion.php">Connexion</a>
+                    <a href="/webfiles/views/user/sigup.php">Inscription</a>
+                </div>
+                <?php endif; ?>
+                <?php if($_SESSION) : ?>
+                <div class="flex usermenu">
+                    <?php if($_SESSION['role' === "['ROLE_ADMIN']"]) : ?>
+                    <a href="/webfiles/views/admin/index.php">Administration</a>
+                    <?php endif; ?>
+                    <a href="/webfiles/views/user/profil.php">Profil</a>
+                    <a href="<?php session_unset(); ?>">Déconnexion</a>
+                </div>
+                <?php endif; ?>
+                <nav class="flex">
+                        <ul class="flex">
+                            <li><a href="/index.php">Accueil</a></li>
+                            <li><a href="/webfiles/views/country/pagePays.php">Pays</a></li>
+                            <li><a href="/webfiles/views/league/pageLigue.php">Ligues</a></li>
+                            <li><a href="/webfiles/views/club/pageClub.php">Clubs</a></li>
+                            <li><a href="/webfiles/views/player/pageJoueur.php">Joueurs</a></li>
+                        </ul>
+                    </nav>
+            </div>
         </header>
 

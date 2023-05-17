@@ -4,58 +4,79 @@
   padding: 0;
 }
 
-body {
-  background-image: url(/stade.png);
-  background-size: 100%;
+.flex {
+  display: flex;
 }
 
-header {
+.flex-col {
+  flex-direction: column;
+}
+
+body {
+  background-image: url(/assets/img/stade.png);
+  background-size: cover;
+}
+body header {
   background-color: rgb(30, 74, 196);
+  width: 100%;
+  justify-content: space-between;
 }
-header img {
+body header img {
   width: 100px;
-  height: 82px;
-  display: flex;
-  margin-right: 30rem;
+  height: 100px;
+  padding: 1.5rem;
 }
-header ul {
+body header div {
+  justify-content: right;
+}
+body header div nav {
+  margin-top: 1.75rem;
+}
+body header div nav ul {
   list-style: none;
-  display: flex;
-  justify-content: flex-end;
   text-decoration: none;
 }
-header li {
-  padding: 2rem;
-}
-header a {
-  padding: 2rem;
+body header div nav ul li a {
+  padding: 1rem 2rem;
   color: white;
   text-decoration: none;
-  font-family: "roboto mono";
 }
-header a:hover {
+body header div nav ul li a:hover {
   background-color: rgb(182, 182, 182);
   color: black;
 }
-
-main h1 {
+body header div div.usermenu {
+  margin-top: 1rem;
+  margin-right: 2rem;
+}
+body header div div.usermenu a {
+  text-decoration: none;
+  color: white;
+  text-align: right;
+  padding-left: 0.75rem;
+}
+body main h1 {
   text-align: center;
 }
-main .allcard {
-  display: flex;
+body main .allcard {
   border: solid 5px white;
   background-color: blanchedalmond;
   margin-top: 3rem;
 }
-main h2 {
+body main .firstCard,
+body main .secondCard {
+  display: flex;
+  justify-content: center;
+}
+body main h2 {
   text-align: center;
 }
-main .card {
+body main .card {
   padding: 1.5rem;
   border-right: solid 1px #D5D8D8;
   border-bottom: solid 1px #D5D8D8;
 }
-main .card img {
+body main .card img {
   margin: 2rem 0;
   width: 100%;
   height: 200px;
