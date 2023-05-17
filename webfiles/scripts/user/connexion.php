@@ -1,5 +1,7 @@
 <?php 
-
+$value = 'accepted';
+setcookie("CookieCon", "$value", time()+60, '/');
+header('Location:');
 
 // Validation du formulaire
 if (isset($_POST['email']) &&  isset($_POST['password'])) {
@@ -14,7 +16,6 @@ if (isset($_POST['email']) &&  isset($_POST['password'])) {
            echo "Echec de la connexion";
                 $_POST['email'];
                 $_POST['password'];
-         
         }
     }
 } ?>
