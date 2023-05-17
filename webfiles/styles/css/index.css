@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+body {
+  background-image: url(/assets/img/stade.png);
+  background-size: cover;
+}
+body header {
+  background-color: rgb(30, 74, 196);
+  width: 100%;
+  justify-content: space-between;
+}
+body header img {
+  width: 100px;
+  height: 100px;
+  padding: 1.5rem;
+}
+body header div {
+  justify-content: right;
+}
+body header div nav {
+  margin-top: 1.75rem;
+}
+body header div nav ul {
+  list-style: none;
+  text-decoration: none;
+}
+body header div nav ul li a {
+  padding: 1rem 2rem;
+  color: white;
+  text-decoration: none;
+}
+body header div nav ul li a:hover {
+  background-color: rgb(182, 182, 182);
+  color: black;
+}
+body header div div.usermenu {
+  margin-top: 1rem;
+  margin-right: 2rem;
+}
+body header div div.usermenu a {
+  text-decoration: none;
+  color: white;
+  text-align: right;
+  padding-left: 0.75rem;
+}
+body main form {
+  width: 50%;
+  margin: 0 auto;
+  background: rgb(164, 16, 16);
+}
+body main form input {
+  width: 50%;
+  margin: 0.5rem auto;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+body main form button[type=submit] {
+  width: 25%;
+  background: white;
+  margin: 1rem auto;
+  padding: 1rem 0;
+  border-radius: 8px;
+}
+body main form.signup h2 {
+  margin: 0 auto;
+}
+body main form.signup p {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/*# sourceMappingURL=index.css.map */
