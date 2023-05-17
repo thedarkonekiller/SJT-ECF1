@@ -18,7 +18,7 @@
                 <?php if(!$_SESSION) : ?>
                 <div class="flex usermenu">
                     <a href="/webfiles/views/user/connexion.php">Connexion</a>
-                    <a href="/webfiles/views/user/sigup.php">Inscription</a>
+                    <a href="/webfiles/views/user/signup.php">Inscription</a>
                 </div>
                 <?php endif; ?>
                 <?php if($_SESSION) : ?>

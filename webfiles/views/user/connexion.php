@@ -1,12 +1,10 @@
-<?php
-require_once('/webfiles/scripts/user/connexion.php');
-?>
 
-<form action="home.php" method="POST">
+
+<form action="/webfiles/scripts/user/connexion.php" method="POST">
  
     <div class="mailForm">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email">
+        <input type="email" class="form-control" name="email">
     </div>
     <div class="passForm">
         <label for="password" class="form-label">Mot de passe</label>
