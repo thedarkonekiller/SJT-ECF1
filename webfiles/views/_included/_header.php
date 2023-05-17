@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/b94fcc4ff9.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="flex">
+<body>
         <header class="flex">
             <img src="/assets/img/balloncuir.svg" alt="Image du ballon sur le header">
             <div class="flex flex-col">
