@@ -21,17 +21,18 @@ error_reporting(E_ALL);
         }
     }
  
-    function updateLeague(string $name){
+    function updateLeague(string $name, int $id){
         // On importe le fichier de connexion à la base de donnée
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
         // On prépare la requête et la variable name
-        $sql = "UPDATE league SET name = :name";
+        $sql = "UPDATE league SET name = :name WHERE id = :id";
     
         // On execute la requête
         try {
             $req = $conn->prepare($sql);
             $req->bindParam(':name', $name, PDO::PARAM_STR);
+            $req->bindParam(':id', $id, PDO::PARAM_INT);
             $req->execute();
             
         } catch (Exception $e) {
@@ -120,8 +121,9 @@ if($_POST && $_POST['updateNameCountry']){
     header('Location: /webfiles/views/admin/country');
 }
 elseif($_POST && $_POST['updateNameLeague']){
+    $id = $_POST['updateLeagueId'];
     $name = $_POST['updateNameLeague'];
-    updateLeague($name);
+    updateLeague($name, $id);
     header('Location: /webfiles/views/admin/league');
 }
 elseif($_POST && $_POST['updateNameClub']){

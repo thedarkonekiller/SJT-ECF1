@@ -79,3 +79,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdClub']){
     deleteClub($id);
     header('Location: /webfiles/views/admin/club');
 }
+if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdLeague']){
+    $id = $_POST['deleteIdLeague'];
+    deleteLeague($id);
+    header('Location: /webfiles/views/admin/league');
+}
