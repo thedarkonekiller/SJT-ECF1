@@ -106,22 +106,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addLeagueName']){
 }
 
 function createUser(string $userName, string $lastName, string $firstName, string $email, string $passwd){
-
+    // On importe le fichier de connexion à la base de donnée
     require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    $sql = "INSERT INTO user (username, lastName, firstName, email, passwd) VALUES (:userName, :lastName, :firstName, :email, :passwd)";
+     // On prépare la requête et les variables firstname, lastname, nationalite, poste, birthday, playerpic.
+    $sql = "INSERT INTO user (username, email, passwd, lastName, firstName ) VALUES (:userName, :email, :passwd, :lastName, :firstName)";
 
+    // On execute la requête
     try {
         $req = $conn->prepare($sql);
         $req->bindValue(':userName', $userName, PDO::PARAM_STR);
-        $req->bindValue(':lastName', $lastName, PDO::PARAM_STR);
-        $req->bindValue(':firstName', $firstName, PDO::PARAM_STR);
         $req->bindValue(':email', $email, PDO::PARAM_STR);
         $req->bindValue(':passwd', $passwd, PDO::PARAM_STR);
+        $req->bindValue(':lastName', $lastName, PDO::PARAM_STR);
+        $req->bindValue(':firstName', $firstName, PDO::PARAM_STR);
         $req->execute();
 
     }
     catch(PDOException $e) {
+        //On affiche un message en cas d'erreur
         echo $sql . "<br>" . $e->getMessage();
     }
 }
