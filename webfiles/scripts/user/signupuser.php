@@ -7,7 +7,7 @@ if ($conn){
             if (empty(Validator($_POST))) {
                   if ($_POST['userName'] && $_POST['firstName'] && $_POST['lastName'] && $_POST['email'] && $_POST['password'] && isset($_POST['userName'], $_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'])) {
                         $userName = $_POST['userName'];
-                        $firstsName = $_POST['firstName'];
+                        $firstName = $_POST['firstName'];
                         $lastName = $_POST['lastName'];
                         $email = $_POST['email'];
                         $password = $_POST['password'];

@@ -105,20 +105,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addLeagueName']){
     header('Location: /webfiles/views/admin/league');
 }
 
-function createUser(string $userName, string $lastName, string $firstName, string $email, string $passwd, string $typeUsers = 'usr'){
+function createUser(string $userName, string $lastName, string $firstName, string $email, string $passwd){
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
+    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    $sql = "INSERT INTO user (username, last_name, first_name, email, password, role) VALUES (:userName, :lastName, :firstName, :email, :passwd, :typeUsers)";
+    $sql = "INSERT INTO user (username, email, passwd, lastName, firstName ) VALUES (:userName, :email, :passwd, :lastName, :firstName)";
 
     try {
         $req = $conn->prepare($sql);
         $req->bindValue(':userName', $userName, PDO::PARAM_STR);
-        $req->bindValue(':lastName', $lastName, PDO::PARAM_STR);
-        $req->bindValue(':firstName', $firstName, PDO::PARAM_STR);
         $req->bindValue(':email', $email, PDO::PARAM_STR);
         $req->bindValue(':passwd', $passwd, PDO::PARAM_STR);
-        $req->bindValue(':typeUsers', $typeUsers, PDO::PARAM_STR);
+        $req->bindValue(':lastName', $lastName, PDO::PARAM_STR);
+        $req->bindValue(':firstName', $firstName, PDO::PARAM_STR);
         $req->execute();
 
     }
