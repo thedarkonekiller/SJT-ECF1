@@ -2,7 +2,7 @@
 
 function getAll(string $table){
     
-    require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
+    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
         
         $sql = "SELECT * FROM $table";
 
@@ -21,7 +21,7 @@ function getAll(string $table){
 
 function getByIdCountry(int $id){
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
+    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
         
         $sql = "SELECT * FROM country WHERE id = :id";
 
@@ -42,7 +42,7 @@ function getByIdCountry(int $id){
 
 function getByIdLeague(int $id){
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
+    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
         
         $sql = "SELECT * FROM league WHERE id = :id";
 
@@ -63,7 +63,7 @@ function getByIdLeague(int $id){
 
     function getByIdClub(int $id){
     
-        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
+        require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbConnect.php');
             
             $sql = "SELECT * FROM club WHERE id = :id";
     
