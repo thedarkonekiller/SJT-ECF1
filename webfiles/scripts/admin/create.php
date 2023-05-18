@@ -1,4 +1,6 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/functions.php');
+
 /**
  * Permet de créer un pays
  *
@@ -156,6 +158,8 @@ function createUser(string $userName, string $lastName, string $firstName, strin
 
 // Traitement du formulaire d'ajout de club
 if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addClubName']){
+    if (Validator($_POST)) {
+     
     $name = $_POST['addClubName'];
     $createClub = $_POST['addCludCreatedDate'];
     $descClub = $_POST['addClubDescription'];
@@ -164,10 +168,34 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addClubName']){
     $leagueId = $_POST['addClubLeague'];
     createClub($name, $createClub, $descClub, $imgClub, $Stade, $leagueId);
     header('Location: /webfiles/views/admin/club');
+} else { ?>
+    <!-- On affiche un message d'erreur -->
+    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+    <p class="danger">Les informations envoyées ne sont pas valides, vous allez être redirigé vers la page des clubs dans 5s</p>
+    <?php 
+    require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+    RedirectToURL('/webfiles/views/admin/club', 5);
+    }   
 }
 // Traitement du formulaire d'ajout de ligue
 if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addLeagueName']){
+    if (empty(Validator($_POST))) {
     $name = $_POST['addLeagueName'];
     createLeague($name);
     header('Location: /webfiles/views/admin/league');
+} else { ?>
+    <!-- On affiche un message d'erreur -->
+    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+    <p class="danger">
+        <?php
+            $errors = Validator($_POST);
+            foreach ($errors as $error) { ?>
+                <p class="danger"><?= $error ?></p>
+            <?php }
+        ?>
+    </p>
+    <?php 
+    require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+    RedirectToURL('/webfiles/views/admin/league', 5);
+    }   
 }

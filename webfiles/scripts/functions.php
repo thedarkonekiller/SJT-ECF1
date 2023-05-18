@@ -25,7 +25,7 @@ $msgError = [];
 
 foreach ($array as $key => $value) {
 
-    if ($key === "firstName" || $key === 'lastName' || $key === 'userName') {
+    if ($key === "firstName" || $key === 'lastName' || $key === 'userName' || $key === 'addLeagueName') {
         
         //we check that the fields are well filled
         if (empty(trim($value))) {
