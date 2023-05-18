@@ -27,7 +27,7 @@ function Validator($array)
 
     foreach ($array as $key => $value) {
 
-        if ($key === "firstName" || $key === 'lastName' || $key === 'userName' || $key === 'addLeagueName' || $key === 'addClubName' || $key === 'addCludCreatedDate' || $key === 'addClubStadium') {
+        if ($key === "firstName" || $key === 'lastName' || $key === 'userName' || $key === 'addLeagueName' || $key === 'addClubName' || $key === 'addCludCreatedDate' || $key === 'addClubStadium' || $key === 'addCountryName' || $key === 'updateNameCountry') {
 
             //we check that the fields are well filled
             if (empty(trim($value))) {
@@ -68,36 +68,33 @@ function Validator($array)
                     }
                 } else {
 
-                if ($key === "url") {
-            
-            //we check that the field is well filled
-            if (empty($value)) {
-                $msgError[] = "L'Email doit être renseigné";
-            } else {
-                //expected format: Email
-                if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    $msgError[] = "Votre email doit être au format unnom@undomaine.uneextension.";
-                    $msgError[] = "Il doit comporter un seul caractère @.";
-                    $msgError[] = "Ce caractère doit être suivi d'un nom de domaine qui contient au moins un point puis une extension.";
-                    $msgError[] = "Les caractères spéciaux ne sont pas acceptés";
-                }    
-            }
-        } else {
+                    if ($key === "addClubImage") {
 
-            if ($key === "password") {
-            
-                //we check that the field is well filled
-                if (empty(trim($value))) {
-                    $msgError[] = "Le mot de passe doit être renseigné";
-                } else {
-                    //expected format: password
-                    if (!preg_match($pwdPtrn, trim($value))) {
-                        $msgError[] = "Votre mot de passe doit être formé d'un minimum de 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial";
-                    }
-                }
-            } else {
-                if (!empty($_FILES)) {
-                    $tempPath = $_FILES["img"]["tmp_name"];
+                        //we check that the field is well filled
+                        if (empty($value)) {
+                            $msgError[] = "L'URL doit être renseigné";
+                        } else {
+                            //expected format: Email
+                            if (!filter_var($value, FILTER_VALIDATE_URL)) {
+                                $msgError[] = "Votre URL doit être au format http://domaine.com ou https://domaine.com";
+                            }
+                        }
+                    } else {
+
+                        if ($key === "password") {
+
+                            //we check that the field is well filled
+                            if (empty(trim($value))) {
+                                $msgError[] = "Le mot de passe doit être renseigné";
+                            } else {
+                                //expected format: password
+                                if (!preg_match($pwdPtrn, trim($value))) {
+                                    $msgError[] = "Votre mot de passe doit être formé d'un minimum de 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial";
+                                }
+                            }
+                        } else {
+                            if (!empty($_FILES)) {
+                                $tempPath = $_FILES["img"]["tmp_name"];
 
 
                                 if (exif_imagetype($tempPath) < 1 || exif_imagetype($tempPath) > 18) {
@@ -112,8 +109,3 @@ function Validator($array)
     }
     return $msgError;
 }
- 
-
-
-
-    

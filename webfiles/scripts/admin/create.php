@@ -210,3 +210,27 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addLeagueName']){
     RedirectToURL('/webfiles/views/admin/league', 5);
     }   
 }
+
+
+// Traitement du formulaire d'ajout du pays
+if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addCountryName']){
+    if (empty(Validator($_POST))) {
+    $name = $_POST['addCountryName'];
+    createCountry($name);
+    header('Location: /webfiles/views/admin/country');
+} else { ?>
+    <!-- On affiche un message d'erreur -->
+    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+    <p class="danger">
+        <?php
+            $errors = Validator($_POST);
+            foreach ($errors as $error) { ?>
+                <p class="danger"><?= $error ?></p>
+            <?php }
+        ?>
+    </p>
+    <?php 
+    require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+    RedirectToURL('/webfiles/views/admin/country', 5);
+    }   
+}
