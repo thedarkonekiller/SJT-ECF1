@@ -24,7 +24,7 @@
             $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
             $conn->exec($sql);
             echo "Base de données créée avec succès<br>";
-            echo "Pensez à renseigner vos informations de connexion dans le fichier dbconnect.php situé dans /webfiles/scripts/admin"
+            echo "Pensez à renseigner vos informations de connexion dans le fichier dbconnect.php situé dans /webfiles/scripts/admin";
 
             //Using the database
             $conn->exec("USE $dbname");
