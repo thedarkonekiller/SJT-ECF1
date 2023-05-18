@@ -7,18 +7,18 @@ function RedirectToURL($url, $waitmsg = 1) {
 
 function Validator($array){
 
-//  protection XSS 
+//protection XSS
 foreach ($array as $element => $valeur) {
     $array[$element] = htmlspecialchars($valeur);
 }
 
-//  Définition des patterns
+//Pattern definition
 $userPtrn = "/^[a-zA-ZÀ-ÿ0-9.-]+$/";
 $pwdPtrn = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
  
-//  validations côté serveur
+//server-side validations
 
-//  initialisation de la variable qui va afficher les messages d'erreurs
+//initialize the variable that will display error messages
 $msgError = [];
 
 
@@ -27,11 +27,11 @@ foreach ($array as $key => $value) {
 
     if ($key === "firstName" || $key === 'lastName' || $key === 'userName') {
         
-        //  on verifie que les champs sont bien remplis
+        //we check that the fields are well filled
         if (empty(trim($value))) {
             $msgError[] = "Le champ doit être renseigné";
         } else {
-            //  format attendu : username
+            // expected format : username
             if (trim($value) && strlen($value) < 0 || strlen($value) > 31 || !preg_match($userPtrn,trim($value))) {
                 $msgError[] = "Le champ doit être compris entre 1 et 30 caractères et ne peut pas contenir de caractères spéciaux";
             }
@@ -41,11 +41,11 @@ foreach ($array as $key => $value) {
 
         if ($key === "email") {
             
-            //  on verifie que le champ est bien rempli
+            //we check that the field is well filled
             if (empty($value)) {
                 $msgError[] = "L'Email doit être renseigné";
             } else {
-                // format attendu : Email
+                //expected format: Email
                 if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
                     $msgError[] = "Votre email doit être au format unnom@undomaine.uneextension.";
                     $msgError[] = "Il doit comporter un seul caractère @.";
@@ -57,11 +57,11 @@ foreach ($array as $key => $value) {
 
             if ($key === "password") {
             
-                //  on verifie que le champ est bien rempli
+                //we check that the field is well filled
                 if (empty(trim($value))) {
                     $msgError[] = "Le mot de passe doit être renseigné";
                 } else {
-                    // format attendu : password
+                    //expected format: password
                     if (!preg_match($pwdPtrn, trim($value))) {
                         $msgError[] = "Votre mot de passe doit être formé d'un minimum de 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial";
                     }

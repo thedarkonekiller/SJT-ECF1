@@ -1,51 +1,51 @@
 <?php
 
 function createCountry(string $name){
-    // On importe le fichier de connexion à la base de donnée
+    //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et la variable name
+    //We prepare the query and the variable name
     $sql = "INSERT INTO country (name) VALUES (:name)";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':name', $name, PDO::PARAM_STR);
         $req->execute();
         
     } catch (Exception $e) {
-        //On affiche un message en cas d'erreur
+        //We display a message in case of error
         echo 'Erreur: ' . $e->getMessage();
     }
 }
 
 function createLeague(string $league){
-    // On importe le fichier de connexion à la base de donnée
+    //We import the connection file to the database
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-
-    // On prépare la requête et les variables nameclub, createclub, locstade, imgclub, paragclub.
+    
+    //We prepare the request and the variables nameclub, createclub, locstade, imgclub, paragclub.
     $sql = "INSERT INTO league (name) VALUES (:league)";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':league', $league, PDO::PARAM_STR);
         $req->execute();
         
     } catch (Exception $e) {
-        //On affiche un message en cas d'erreur
+        //We display a message in case of error
         echo 'Erreur: ' . $e->getMessage();
     }
 }
 
 function createClub(string $name, string $createClub, string $descClub, string $imgClub, string $Stade, int $leagueId){
-    // On importe le fichier de connexion à la base de donnée
+    //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et les variables nameclub, createclub, locstade, imgclub, desclub.
+    //We prepare the request and the variables nameclub, createclub, locstade, imgclub, desclub.
     $sql = "INSERT INTO club(name, createDate, descrip, logo, stadiumName, league_id) VALUES (:name , :createClub, :descClub, :imgClub, :Stade, :leagueId)";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':name', $name, PDO::PARAM_STR);
@@ -57,7 +57,7 @@ function createClub(string $name, string $createClub, string $descClub, string $
         $req->execute();
         
     } catch (Exception $e) {
-        //On affiche un message en cas d'erreur
+        //We display a message in case of error
         echo 'Erreur: ' . $e->getMessage();
     }
 }
@@ -65,13 +65,13 @@ function createClub(string $name, string $createClub, string $descClub, string $
 
 
 function createPlayer(string $firstName, string $lastName, string $nationalite, string $poste, string $birthday, string $playerPic){
-    // On importe le fichier de connexion à la base de donnée
+    //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et les variables firstname, lastname, nationalite, poste, birthday, playerpic.
+    //We prepare the request and the variables firstname, lastname, nationality, position, birthday, playerpic.
     $sql = "INSERT INTO player (firstname , lastname , nationalite , poste , birthday , playerpic) VALUES (:firstName , :lastName, :nationalite, :poste, :birthday; :playerPic)";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':firstName', $firstName, PDO::PARAM_STR);
@@ -83,7 +83,7 @@ function createPlayer(string $firstName, string $lastName, string $nationalite, 
         $req->execute();
         
     } catch (Exception $e) {
-        //On affiche un message en cas d'erreur
+        //We display a message in case of error
         echo 'Erreur: ' . $e->getMessage();
     }
 }
@@ -106,13 +106,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['addLeagueName']){
 }
 
 function createUser(string $userName, string $lastName, string $firstName, string $email, string $passwd){
-    // On importe le fichier de connexion à la base de donnée
+    //Import the database connection file
     require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-     // On prépare la requête et les variables firstname, lastname, nationalite, poste, birthday, playerpic.
+     //We prepare the request and the variables firstname, lastname, nationality, position, birthday, playerpic.
     $sql = "INSERT INTO user (username, email, passwd, lastName, firstName ) VALUES (:userName, :email, :passwd, :lastName, :firstName)";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindValue(':userName', $userName, PDO::PARAM_STR);
@@ -124,7 +124,7 @@ function createUser(string $userName, string $lastName, string $firstName, strin
 
     }
     catch(PDOException $e) {
-        //On affiche un message en cas d'erreur
+        //We display a message in case of error
         echo $sql . "<br>" . $e->getMessage();
     }
 }
