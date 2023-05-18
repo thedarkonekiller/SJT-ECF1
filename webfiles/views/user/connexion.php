@@ -1,5 +1,3 @@
-
-
 <form action="/webfiles/scripts/user/connexion.php" method="POST">
  
     <div class="mailForm">
@@ -12,5 +10,3 @@
     </div>
     <button type="submit" name="login" class="sendForm">Envoyer</button>
 </form>
-
-
