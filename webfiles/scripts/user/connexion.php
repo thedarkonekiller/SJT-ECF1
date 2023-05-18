@@ -6,8 +6,8 @@ if ($conn) {
     Validator($_POST);
     // Vérification si le paramètre 'login' est défini dans la requête POST
     if (isset($_POST['login'])) {
-        $email = $_POST['email'];
-        $passwd = $_POST['password'];
+        $email = $_POST['mail'];
+        $passwd = $_POST['pswrd'];
         $requser = "SELECT * FROM user WHERE email = :email";
         try {
             // Préparation de la requête avec un paramètre lié

@@ -1,6 +1,10 @@
 <aside>
     <nav class="col-span-2 flex flex-col">
             <div class="flex">
+                <i class="fa-solid fa-reply-all"></i>
+                <a href="/index.php" title="">Retour au site</a>
+            </div>
+            <div class="flex">
                 <i class="fa-solid fa-users"></i>
                 <a href="/webfiles/views/admin/user/index.php" title="">Utilisateurs</a>
             </div>
