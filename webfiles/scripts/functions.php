@@ -25,7 +25,7 @@ $msgError = [];
 
 foreach ($array as $key => $value) {
 
-    if ($key === "firstName" || $key === 'lastName' || $key === 'userName' || $key === 'addLeagueName' || $key === 'addClubName') {
+    if ($key === "firstName" || $key === 'lastName' || $key === 'userName' || $key === 'addLeagueName') {
         
         //we check that the fields are well filled
         if (empty(trim($value))) {
@@ -40,22 +40,6 @@ foreach ($array as $key => $value) {
     } else{
 
         if ($key === "email") {
-            
-            //we check that the field is well filled
-            if (empty($value)) {
-                $msgError[] = "L'Email doit être renseigné";
-            } else {
-                //expected format: Email
-                if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    $msgError[] = "Votre email doit être au format unnom@undomaine.uneextension.";
-                    $msgError[] = "Il doit comporter un seul caractère @.";
-                    $msgError[] = "Ce caractère doit être suivi d'un nom de domaine qui contient au moins un point puis une extension.";
-                    $msgError[] = "Les caractères spéciaux ne sont pas acceptés";
-                }    
-            }
-        } else {
-
-                if ($key === "url") {
             
             //we check that the field is well filled
             if (empty($value)) {
@@ -98,8 +82,3 @@ foreach ($array as $key => $value) {
 
     return $msgError;
 }
- 
-
-
-
-    
