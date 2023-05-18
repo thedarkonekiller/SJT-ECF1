@@ -122,5 +122,38 @@ body main.country section.card h2:nth-of-type(2) {
 body main.country section.card table {
   grid-area: leagues;
 }
+body .rgpd {
+  background: white;
+  color: black;
+  max-width: 800px;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 100;
+  border-radius: 6px;
+}
+body .rgpd > div {
+  width: 50%;
+  margin: 1.125rem auto;
+  padding: 0 1.5rem;
+}
+body .rgpd > div p {
+  text-align: justify;
+}
+body .rgpd > div ul {
+  margin-left: 1rem;
+}
+body .rgpd form {
+  width: 100%;
+  justify-content: center;
+}
+body .rgpd form button {
+  background: black;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  max-height: 50px;
+}
 
 /*# sourceMappingURL=index.css.map */

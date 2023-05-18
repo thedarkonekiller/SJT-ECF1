@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/functions.php');
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbConnect.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
 if ($conn) {
     Validator($_POST);
     // Vérification si le paramètre 'login' est défini dans la requête POST
