@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/create.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/read.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/delete.php'); ?>

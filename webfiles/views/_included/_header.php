@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+// Vérifie si une session est déjà active
+if (session_status() === PHP_SESSION_NONE) {
+    // Aucune session active, démarrer une nouvelle session
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,6 +24,7 @@
         <div class="flex flex-col">
             <div class="flex usermenu">
                 <?php if ($_SESSION && $_SESSION["user"] == TRUE) : ?>
+                    <p>Bonjour <?= $_SESSION['user']['pseudo'] ?></p>
                     <?php if ($_SESSION['user']['role'] === "[ROLE_ADMIN]") : ?>
                         <a href="/webfiles/views/admin/index.php">Administration</a>
                     <?php endif; ?>
