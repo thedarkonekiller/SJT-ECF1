@@ -26,10 +26,12 @@ $arrayClub = getByIdClub($id);
             <select name="updateClubLeague" id="clubLeague">
                 <option value="" selected disabled>
                 <?php 
+                // On stocke les informations du club dont l'id a été recupéré précédemment
                 $league = getByIdLeague($arrayClub['league_id']);
                 echo $league['name'];
                 ?></option>
                 <?php 
+                // On récupére les données de la table club qui vont etre stockés dans la variable $leagues
                 $leagues = getAll('league');
                 foreach ($leagues as $league): ?>
                     <option value="<?= $league['id'] ?>"><?= $league['name'] ?></option>

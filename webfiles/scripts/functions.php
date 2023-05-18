@@ -1,4 +1,5 @@
 <?php
+
 function RedirectToURL($url, $waitmsg = 1)
 {
     header("Refresh:$waitmsg; URL=$url");
@@ -26,7 +27,7 @@ function Validator($array)
 
 
     foreach ($array as $key => $value) {
-
+        // On créer une variable clé et on va récupérer les name des formulaires 
         if ($key === "firstName" || $key === 'lastName' || $key === 'userName' || $key === 'addLeagueName' || $key === 'addClubName' || $key === 'addCludCreatedDate' || $key === 'addClubStadium' || $key === 'addCountryName' || $key === 'updateNameCountry') {
 
             //we check that the fields are well filled
@@ -93,10 +94,11 @@ function Validator($array)
                                 }
                             }
                         } else {
+                            // Si la variable $FILES n'est pas vide 
                             if (!empty($_FILES)) {
                                 $tempPath = $_FILES["img"]["tmp_name"];
 
-
+                                // Si exif_imagetype est inférieur à 1 ou supérieur à 18
                                 if (exif_imagetype($tempPath) < 1 || exif_imagetype($tempPath) > 18) {
                                     $msgError[] = "Votre fichier n'est pas une image valide";
                                 }

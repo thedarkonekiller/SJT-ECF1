@@ -3,7 +3,7 @@
 function getAll(string $table){
     
     require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-        
+        // On prépare notre requete
         $sql = "SELECT * FROM $table";
 
         try {
@@ -22,7 +22,7 @@ function getAll(string $table){
 function getByIdCountry(int $id){
 
     require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-        
+        // On prépare notre requete
         $sql = "SELECT * FROM country WHERE id = :id";
 
         try {
@@ -43,13 +43,17 @@ function getByIdCountry(int $id){
 function getByIdLeague(int $id){
 
     require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-        
+        // On sélectionne notre requete
         $sql = "SELECT * FROM league WHERE id = :id";
 
         try {
+            // On prépare la requete
             $query = $conn->prepare($sql);
+            // On lie la valeur de l'identifiant au paramétre id
             $query->bindParam(':id', $id, PDO::PARAM_INT);
+            // On éxécute la requete 
             $results = $query->execute();
+            // On récupére le résultat de la requete
             $results = $query->fetch(PDO::FETCH_ASSOC);
 
             return $results;

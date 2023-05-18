@@ -23,9 +23,13 @@ if (session_status() === PHP_SESSION_NONE) {
         <img src="/assets/img/balloncuir.svg" alt="Image du ballon sur le header">
         <div class="flex flex-col">
             <div class="flex usermenu">
-                <?php if ($_SESSION && $_SESSION["user"] == TRUE) : ?>
+                <?php
+                    // Si on arrive à se connecter
+                    if ($_SESSION && $_SESSION["user"] == TRUE) : ?>
                     <p>Bonjour <?= $_SESSION['user']['pseudo'] ?></p>
-                    <?php if ($_SESSION['user']['role'] === "[ROLE_ADMIN]") : ?>
+                    <?php
+                    // Si on arrive à se connecter en tant qu'administrateur
+                    if ($_SESSION['user']['role'] === "[ROLE_ADMIN]") : ?>
                         <a href="/webfiles/views/admin/index.php">Administration</a>
                     <?php endif; ?>
                     <a href="/webfiles/views/user/profil.php">Profil</a>

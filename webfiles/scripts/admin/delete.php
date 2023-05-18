@@ -55,7 +55,7 @@ function deleteClub(int $id){
     }
 }
 function deleteUser(int $id){
-    // On importe le fichier de connexion à la base de donnée
+    // On importe le fichier de connexion à la base de données
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
     // On prépare la requête et la variable id
@@ -73,14 +73,19 @@ function deleteUser(int $id){
     }
 }
 
-
+// On vérifie si une valeur est soumise avec le nom de champ
 if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdClub']){
+    // On récupére la valeur soumise avec le nom du champ
     $id = $_POST['deleteIdClub'];
+    // On appelle la fonction tout en passant par la valeur des identifiants
     deleteClub($id);
     header('Location: /webfiles/views/admin/club');
 }
+// On vérifie si une valeur est soumise avec le nom de champ
 if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdLeague']){
+     // On récupére la valeur soumise avec le nom du champ
     $id = $_POST['deleteIdLeague'];
+     // On appelle la fonction tout en passant par la valeur des identifiants
     deleteLeague($id);
     header('Location: /webfiles/views/admin/league');
 }
