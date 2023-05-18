@@ -1,3 +1,10 @@
+<?php
+// Vérifie si une session est déjà active
+if (session_status() === PHP_SESSION_NONE) {
+    // Aucune session active, démarrer une nouvelle session
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,33 +19,32 @@
 </head>
 
 <body>
-        <header class="flex">
-            <img src="/assets/img/balloncuir.svg" alt="Image du ballon sur le header">
-            <div class="flex flex-col">
-                <?php if(!$_SESSION) : ?>
-                <div class="flex usermenu">
-                    <a href="/webfiles/views/user/connexion.php">Connexion</a>
-                    <a href="/webfiles/views/user/signup.php">Inscription</a>
-                </div>
-                <?php endif; ?>
-                <?php if($_SESSION) : ?>
-                <div class="flex usermenu">
-                    <?php if($_SESSION['role' === "['ROLE_ADMIN']"]) : ?>
-                    <a href="/webfiles/views/admin/index.php">Administration</a>
+    <header class="flex">
+        <img src="/assets/img/balloncuir.svg" alt="Image du ballon sur le header">
+        <div class="flex flex-col">
+            <div class="flex usermenu">
+                <?php if ($_SESSION && $_SESSION["user"] == TRUE) : ?>
+                    <p>Bonjour <?= $_SESSION['user']['pseudo'] ?></p>
+                    <?php if ($_SESSION['user']['role'] === "[ROLE_ADMIN]") : ?>
+                        <a href="/webfiles/views/admin/index.php">Administration</a>
                     <?php endif; ?>
                     <a href="/webfiles/views/user/profil.php">Profil</a>
-                    <a href="<?php session_unset(); ?>">Déconnexion</a>
-                </div>
+                    <a href="/webfiles/views/user/deconnexion.php">Déconnexion</a>
+                <?php else : ?>
+                    <div class="flex usermenu">
+                        <a href="/webfiles/views/user/connexion.php">Connexion</a>
+                        <a href="/webfiles/views/user/signup.php">Inscription</a>
+                    </div>
                 <?php endif; ?>
-                <nav class="flex">
-                        <ul class="flex">
-                            <li><a href="/index.php">Accueil</a></li>
-                            <li><a href="/webfiles/views/country/pagePays.php">Pays</a></li>
-                            <li><a href="/webfiles/views/league/pageLigue.php">Ligues</a></li>
-                            <li><a href="/webfiles/views/club/pageClub.php">Clubs</a></li>
-                            <li><a href="/webfiles/views/player/pageJoueur.php">Joueurs</a></li>
-                        </ul>
-                    </nav>
             </div>
-        </header>
-
+            <nav class="flex">
+                <ul class="flex">
+                    <li><a href="/index.php">Accueil</a></li>
+                    <li><a href="/webfiles/views/country/pagePays.php">Pays</a></li>
+                    <li><a href="/webfiles/views/league/pageLigue.php">Ligues</a></li>
+                    <li><a href="/webfiles/views/club/pageClub.php">Clubs</a></li>
+                    <li><a href="/webfiles/views/player/pageJoueur.php">Joueurs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>

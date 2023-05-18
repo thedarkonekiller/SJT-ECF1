@@ -11,6 +11,14 @@
   flex-direction: column;
 }
 
+.success {
+  background: lime;
+}
+
+.danger {
+  background: tomato;
+}
+
 body {
   background-image: url(/assets/img/stade.png);
   background-size: cover;
@@ -56,7 +64,7 @@ body header div div.usermenu a {
 }
 body main form {
   width: 50%;
-  margin: 0 auto;
+  margin: 3rem auto;
   background: rgb(164, 16, 16);
 }
 body main form input {
@@ -72,12 +80,47 @@ body main form button[type=submit] {
   padding: 1rem 0;
   border-radius: 8px;
 }
-body main form.signup h2 {
+body main form.signup h2, body main form.login h2 {
   margin: 0 auto;
 }
-body main form.signup p {
+body main form.signup p, body main form.login p {
   text-align: center;
   margin-bottom: 1rem;
+}
+body main.profil h1 {
+  margin: 2rem auto;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 2px 2px 4px black;
+}
+body main.country h1 {
+  margin: 2rem auto;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 2px 2px 4px black;
+}
+body main.country section.card {
+  background: rgb(164, 16, 16);
+  color: white;
+  display: grid;
+  grid-template-areas: "image" "name" "leagueTitle" "leagues";
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin: 1rem 1.25rem;
+}
+body main.country section.card h2:nth-of-type(1) {
+  grid-area: name;
+}
+body main.country section.card img {
+  grid-area: image;
+}
+body main.country section.card h2:nth-of-type(2) {
+  grid-area: leagueTitle;
+}
+body main.country section.card table {
+  grid-area: leagues;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -2,10 +2,14 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/create.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbConnect.php');
+var_dump($_POST);
 if ($conn){
       if ($_POST) {
             if (empty(Validator($_POST))) {
+                  echo '1';
+
                   if ($_POST['userName'] && $_POST['firstName'] && $_POST['lastName'] && $_POST['email'] && $_POST['password'] && isset($_POST['userName'], $_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'])) {
+                        echo '2';
                         $userName = $_POST['userName'];
                         $firstName = $_POST['firstName'];
                         $lastName = $_POST['lastName'];

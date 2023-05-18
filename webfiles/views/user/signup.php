@@ -1,8 +1,4 @@
-<?php
-session_start();
-require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/user/signupuser.php');
-?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
 <main class="flex flex-col">
     <form class="flex flex-col signup" action="/webfiles/scripts/user/signupuser.php" method="POST">
         <h2 class="flex">S'inscrire</h2>

@@ -1,16 +1,10 @@
-
-
-<form action="/webfiles/scripts/user/connexion.php" method="POST">
- 
-    <div class="mailForm">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" name="email">
-    </div>
-    <div class="passForm">
-        <label for="password" class="form-label">Mot de passe</label>
-        <input type="password" class="form-control" id="password" name="password">
-    </div>
-    <button type="submit" class="sendForm">Envoyer</button>
-</form>
-
-
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_header.php') ?>
+<main class="flex flex-col">
+    <form class="flex flex-col login" action="/webfiles/scripts/user/connexion.php" method="POST">
+        <h2 class="flex">Connexion</h2>
+        <input type="email" class="form-control" name="mail" placeholder="Votre Email">
+        <input type="password" class="form-control" name="pswrd" placeholder="Votre Mot de passe">
+        <button type="submit" name="login">Se connecter</button>
+    </form>
+</main>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_footer.php') ?>
