@@ -88,16 +88,19 @@ function updateUser(string $name)
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et la variable name
+    // On déclare notre requete
     $sql = "UPDATE user SET name = '$name', birthDate = '$birthday', nationality = '$nationality', post = '$poste'";
 
-    // On execute la requête
+    
     try {
+        // On prépare la requete
         $req = $conn->prepare($sql);
+        // On paramètre les champs de la table 
         $req->bindParam(':name', $name, PDO::PARAM_STR);
         $req->bindParam(':birthDate', $birthday, PDO::PARAM_STR);
         $req->bindParam(':nationality', $nationality, PDO::PARAM_STR);
         $req->bindParam(':post', $poste, PDO::PARAM_STR);
+        // On execute la requete
         $req->execute();
     } catch (Exception $e) {
         //Error log

@@ -21,7 +21,7 @@
                 <?php 
                   // On récupére les données de la table club qui vont etre stockés dans la variable $results
                 $leagues = getAll('league');
-                // On fait une boucle avec toute les valeurs qui seront stockés dans la variable $league
+                // On fait une boucle avec toutes les valeurs qui seront stockés dans la variable $league
                 foreach ($leagues as $league): ?>
                     <option value="<?= $league['id'] ?>"><?= $league['name'] ?></option>
                 <?php endforeach; ?>
