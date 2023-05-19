@@ -10,19 +10,21 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/functions.php');
  *Allows you to create a country
  *
  *@param string $name
+ *@param string $img
  *@return void
  */
-function createCountry(string $name){
+function createCountry(string $name, string $img){
     //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
     //We prepare the query and the variable name
-    $sql = "INSERT INTO country (name) VALUES (:name)";
+    $sql = "INSERT INTO country (name, img) VALUES (:name, :img)";
 
     //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':name', $name, PDO::PARAM_STR);
+        $req->bindParam(':img', $img, PDO::PARAM_STR);
         $req->execute();
         
     } catch (Exception $e) {
