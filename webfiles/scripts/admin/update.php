@@ -83,13 +83,13 @@ function updateClub(int $id, string $name, string $createDate, string $descrip, 
 }
 
 
-function updateUser(string $name, string $userEmail, string $userLastName, string $userFirstName, int $id)
+function updateUser(string $name, string $userEmail, string $userLastName, string $userFirstName, int $id, string $role)
 {
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
 
     // On prépare la requête et la variable name
-    $sql = "UPDATE user SET username = :name, email = :userEmail, lastName = :userLastName, firstName = :userFirstName WHERE id = :id";
+    $sql = "UPDATE user SET username = :name, email = :userEmail, lastName = :userLastName, firstName = :userFirstName, role = :updateUserRole WHERE id = :id";
 
     
     try {
@@ -99,6 +99,7 @@ function updateUser(string $name, string $userEmail, string $userLastName, strin
         $req->bindParam(':userEmail', $userEmail, PDO::PARAM_STR);
         $req->bindParam(':userLastName', $userLastName, PDO::PARAM_STR);
         $req->bindParam(':userFirstName', $userFirstName, PDO::PARAM_STR);
+        $req->bindParam(':updateUserRole', $role, PDO::PARAM_STR);
         $req->bindParam(':id', $id, PDO::PARAM_INT);
         $req->execute();
     } catch (Exception $e) {
@@ -147,8 +148,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $userEmail = $_POST['updateUserEmail'];
         $userLastName = $_POST['updateUserLastName'];
         $userFirstName = $_POST['updateUserFirstName'];
+        $role = $_POST['updateUserRole'];
         $id = $_POST['updateUserId'];
-        updateUser($name, $userEmail, $userLastName, $userFirstName, $id);
+        updateUser($name, $userEmail, $userLastName, $userFirstName, $id, $role);
         header('Location: /webfiles/views/admin/user');
     }
 }
