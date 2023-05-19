@@ -1,6 +1,8 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/read.php') ?>
-<?php $countries = getAll('country'); ?>
+<?php
+    $countries = getAll('country');
+?>
 <main class="flex flex-col country">
     <h1>Les pays</h1>
     <div class="flex">
@@ -18,7 +20,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>'nom de la ligue'</td>
+                        <td>
+                            <?php
+                                $league = getByIdLeague($country['league_id']);
+                                echo $league['name'];
+                            ?>
+                        </td>
                     </tr>
                 </tbody>
             </table>
