@@ -274,7 +274,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
 
             }
-        } else { ?>
+     } else { ?>
             <!-- On affiche un message d'erreur -->
             <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
             <p class="danger">
@@ -290,8 +290,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         RedirectToURL('/webfiles/views/admin/league', 5);
         }
     }
-}
-
 
 
 
