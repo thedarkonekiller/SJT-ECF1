@@ -3,7 +3,7 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-function updateCountry(string $name, int $id)
+function updateCountry(string $name, int $id, string $img)
 {
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
