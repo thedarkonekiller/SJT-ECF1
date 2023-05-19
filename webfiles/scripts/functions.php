@@ -11,20 +11,6 @@ function RedirectToURL($url, $waitmsg = 1)
     header("Refresh:$waitmsg; URL=$url");
     exit;
 }
-/**
- * Permet de protéger un envoi POST
- * contre le XSS
- *
- * @param array $array
- * @return void
- */
-function protectXSS(array $array)
-{
-    //protection XSS
-    foreach ($array as $element => $valeur) {
-        $array[$element] = htmlspecialchars($valeur);
-    }
-}
 
 /**
  * Permet de vérifier l'intégrité des champs d'un formulaire
@@ -32,8 +18,13 @@ function protectXSS(array $array)
  * @param [type] $array
  * @return array
  */
-function Validator(string $field, $value): ?string
+function Validator($array): array
 {
+
+    //protection XSS
+    foreach ($array as $element => $valeur) {
+        $array[$element] = htmlspecialchars($valeur);
+    }
 
     //Pattern definition
     $userPtrn = "/^[a-zA-ZÀ-ÿ0-9|\s.-]+$/";
@@ -41,70 +32,96 @@ function Validator(string $field, $value): ?string
 
     //server-side validations
 
-    if ($field === "addFirstName" || $field === 'addLastName' || $field === 'addUserName' || $field === 'addLeagueName' || $field === 'addClubName' || $field === 'addCludCreatedDate' || $field === 'addClubStadium' || $field === 'addCountryName' || $field === 'updateNameCountry') {
-        // Vérification du champ spécifique
-        if (empty(trim($value))) {
-            return "Le champ doit être renseigné";
-        } else {
-            // Vérification du format
-            if (trim($value) && (strlen($value) < 0 || strlen($value) > 31 || !preg_match($userPtrn, trim($value)))) {
-                return "Le champ doit être compris entre 1 et 30 caractères et ne peut pas contenir de caractères spéciaux";
+    //initialize the variable that will display error messages
+    $msgError = [];
+
+
+
+    foreach ($array as $key => $value) {
+        // On créer une variable clé et on va récupérer les name des formulaires 
+        if ($key === "addFirstName" || $key === 'addLastName' || $key === 'addUserName' || $key === 'addLeagueName' || $key === 'addClubName' || $key === 'addCludCreatedDate' || $key === 'addClubStadium' || $key === 'addCountryName' || $key === 'updateNameCountry') {
+
+            //we check that the fields are well filled
+            if (empty(trim($value))) {
+                $msgError[] = "Le champ doit être renseigné";
+            } else {
+                // expected format : username
+                if (trim($value) && strlen($value) < 0 || strlen($value) > 31 || !preg_match($userPtrn, trim($value))) {
+                    $msgError[] = "Le champ doit être compris entre 1 et 30 caractères et ne peut pas contenir de caractères spéciaux";
+                }
             }
-        }
-    } elseif ($field === "addClubDescription") {
-        // Vérification du champ spécifique
-        if (empty(trim($value))) {
-            return "Le champ doit être renseigné";
         } else {
-            // Vérification du format
-            if (trim($value) && (strlen($value) < 0 || !preg_match($userPtrn, trim($value)))) {
-                return "Le champ doit contenir 1 caractère minimum et ne peut pas contenir de caractères spéciaux";
-            }
-        }
-    } elseif ($field === "addEmail") {
-        // Vérification du champ spécifique
-        if (empty($value)) {
-            return "L'Email doit être renseigné";
-        } else {
-            // Vérification du format
-            if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                return "Votre email doit être au format unnom@undomaine.uneextension. Il doit comporter un seul caractère @. Ce caractère doit être suivi d'un nom de domaine qui contient au moins un point puis une extension. Les caractères spéciaux ne sont pas acceptés";
-            }
-        }
-    } elseif ($field === "addClubImage") {
-        // Vérification du champ spécifique
-        if (empty($value)) {
-            return "L'URL doit être renseigné";
-        } else {
-            // Vérification du format
-            if (!filter_var($value, FILTER_VALIDATE_URL)) {
-                return "Votre URL doit être au format http://domaine.com ou https://domaine.com";
-            }
-        }
-    } elseif ($field === "addPassword") {
-        // Vérification du champ spécifique
-        if (empty(trim($value))) {
-            return "Le mot de passe doit être renseigné";
-        } else {
-            // Vérification du format
-            if (!preg_match($pwdPtrn, trim($value))) {
-                return "Votre mot de passe doit être formé d'un minimum de 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial";
-            }
-        }
-    } elseif ($field === "addFile") {
-        // Vérification du champ spécifique (fichier)
-        if (empty($_FILES)) {
-            return "Aucun fichier n'a été téléchargé";
-        } else {
-            $tempPath = $_FILES["img"]["tmp_name"];
-            if (exif_imagetype($tempPath) < 1 || exif_imagetype($tempPath) > 18) {
-                return "Votre fichier n'est pas une image valide";
+            if ($key === "addClubDescription") {
+
+                //we check that the fields are well filled
+                if (empty(trim($value))) {
+                    $msgError[] = "Le champ doit être renseigné";
+                } else {
+                    // expected format : username
+                    if (trim($value) && strlen($value) < 0 || !preg_match($userPtrn, trim($value))) {
+                        $msgError[] = "Le champ doit contenir 1 caractère minimum et ne peut pas contenir de caractères spéciaux";
+                    }
+                }
+            } else {
+
+                if ($key === "addEmail") {
+
+                    //we check that the field is well filled
+                    if (empty($value)) {
+                        $msgError[] = "L'Email doit être renseigné";
+                    } else {
+                        //expected format: Email
+                        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                            $msgError[] = "Votre email doit être au format unnom@undomaine.uneextension.";
+                            $msgError[] = "Il doit comporter un seul caractère @.";
+                            $msgError[] = "Ce caractère doit être suivi d'un nom de domaine qui contient au moins un point puis une extension.";
+                            $msgError[] = "Les caractères spéciaux ne sont pas acceptés";
+                        }
+                    }
+                } else {
+
+                    if ($key === "addClubImage") {
+
+                        //we check that the field is well filled
+                        if (empty($value)) {
+                            $msgError[] = "L'URL doit être renseigné";
+                        } else {
+                            //expected format: Email
+                            if (!filter_var($value, FILTER_VALIDATE_URL)) {
+                                $msgError[] = "Votre URL doit être au format http://domaine.com ou https://domaine.com";
+                            }
+                        }
+                    } else {
+
+                        if ($key === "addPassword") {
+
+                            //we check that the field is well filled
+                            if (empty(trim($value))) {
+                                $msgError[] = "Le mot de passe doit être renseigné";
+                            } else {
+                                //expected format: password
+                                if (!preg_match($pwdPtrn, trim($value))) {
+                                    $msgError[] = "Votre mot de passe doit être formé d'un minimum de 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial";
+                                }
+                            }
+                        } else {
+                            // Si la variable $FILES n'est pas vide 
+                            if (!empty($_FILES)) {
+                                $tempPath = $_FILES["img"]["tmp_name"];
+
+                                // Si exif_imagetype est inférieur à 1 ou supérieur à 18
+                                if (exif_imagetype($tempPath) < 1 || exif_imagetype($tempPath) > 18) {
+                                    $msgError[] = "Votre fichier n'est pas une image valide";
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
-    
-    return null;
-}    
+    return $msgError;
+}
 
 function isUniquePseudo(string $pseudo) {
     require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
