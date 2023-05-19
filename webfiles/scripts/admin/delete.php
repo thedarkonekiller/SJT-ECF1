@@ -127,7 +127,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         //Retrieve the submitted value with the name of the field
         $id = $_POST['deleteIdCountry'];
         //We call the function while passing through the value of the identifiers
-        deleteClub($id);
+        deleteCountry($id);
         header('Location: /webfiles/views/admin/country');
     }
     //Process the league deletion form

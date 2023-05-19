@@ -1,3 +1,4 @@
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/read.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>
 <main>
@@ -6,6 +7,8 @@
         <form action="/webfiles/scripts/admin/create.php" method="POST" class="flex flex-col">
             <label for="countryName">Nom</label>
             <input type="text" name="addCountryName" id="countryName">
+            <label for="contryImage">Image</label>
+            <input type="url" name="addCountryImage" id="contryImage">
             <button type="submit" name="addCountry">Ajouter</button>
         </form>
     </section>
