@@ -23,7 +23,7 @@ $countries = getAll('country');
                         $leagueNames = getLeagueNameByCountry($country['id']);
                         foreach ($leagueNames as $name) : ?>
                             <tr>
-                                <td><?= $ligueName[['name']]; ?></td>
+                                <td><?= $name['name']; ?></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

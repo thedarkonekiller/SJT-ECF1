@@ -4,32 +4,17 @@
     $clubs = getAll('club');
     
 ?>
-<main class="flex flex-col country">
-    <h1>Les pays</h1>
+<main class="flex flex-col club">
+    <h1>Les Clubs</h1>
     <div class="flex">
         <?php
         foreach ($clubs as $club) : ?>
         <section class="card">
             <h2><?= $club['name'] ?></h2>
-            <img src="<?= $club['img'] ?>" alt="Image de <?= $club['name'] ?>">
-            <h2>Liste des ligues</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>nom</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <?php
-                                $league = getByIdLeague($club['league_id']);
-                                echo $league['name'];
-                            ?>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <p><?= $club['createDate'] ?></p>
+            <p><?= $club['stadiumName'] ?></p>
+            <img src="<?= $club['logo'] ?>" alt="Image de <?= $club['name'] ?>">
+            <p><?= $club['descrip'] ?></p>
         </section>
         <?php endforeach; ?>
     </div>
