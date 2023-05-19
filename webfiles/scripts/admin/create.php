@@ -9,22 +9,20 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/functions.php');
 /**
  * Permet de créer un pays
  *
- *@param string $name
- *@param string $img
- *@return void
+ * @param string $name
+ * @return void
  */
-function createCountry(string $name, string $img){
+function createCountry(string $name){
     //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
     //We prepare the query and the variable name
-    $sql = "INSERT INTO country (name, img) VALUES (:name, :img)";
+    $sql = "INSERT INTO country (name) VALUES (:name)";
 
     //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':name', $name, PDO::PARAM_STR);
-        $req->bindParam(':img', $img, PDO::PARAM_STR);
         $req->execute();
         
     } catch (Exception $e) {
@@ -39,18 +37,17 @@ function createCountry(string $name, string $img){
  * @param string $league
  * @return void
  */
-function createLeague(string $league, int $country){
+function createLeague(string $league){
     //We import the connection file to the database
     require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
     //We prepare the request and the variables nameclub, createclub, locstade, imgclub, paragclub.
-    $sql = "INSERT INTO league (name, country_id) VALUES (:league, :country)";
+    $sql = "INSERT INTO league (name) VALUES (:league)";
 
     //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':league', $league, PDO::PARAM_STR);
-        $req->bindParam(':country', $country, PDO::PARAM_INT);
         $req->execute();
         
     } catch (Exception $e) {
@@ -165,35 +162,11 @@ function createUser(string $userName, string $lastName, string $firstName, strin
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    //Process the add country form
-    if(isset($_POST['addCountry'])){
-        if (empty(Validator($_POST))) {
-            $name = $_POST['addCountryName'];
-            $img = $_POST['addCountryImage'];
-            createCountry($name, $img);
-            header('Location: /webfiles/views/admin/country');
-        } else { ?>
-            <!--An error message is displayed -->
-            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
-            <p class="danger">
-                <?php
-                    $errors = Validator($_POST);
-                    foreach ($errors as $error) { ?>
-                        <p class="danger"><?= $error ?></p>
-                    <?php }
-                ?>
-            </p>
-        <?php 
-        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
-        RedirectToURL('/webfiles/views/admin/country', 5);
-        }
-    }
-    //Process the add league form
-    elseif(isset($_POST['addLeague'])){
+    // Traitement du formulaire d'ajout de ligue
+    if(isset($_POST['addLeague'])){
         if (empty(Validator($_POST))) {
             $name = $_POST['addLeagueName'];
-            $country = $_POST['addLeagueCountry'];
-            createLeague($name, $country);
+            createLeague($name);
             header('Location: /webfiles/views/admin/league');
         } else { ?>
             <!-- On affiche un message d'erreur -->
@@ -213,7 +186,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
     // Traitement du formulaire d'ajout de club
     elseif(isset($_POST['addClub'])){
-        if (protectXSS($_POST)) {
+        if (empty(Validator($_POST))) {
             $name = $_POST['addClubName'];
             $createClub = $_POST['addCludCreatedDate'];
             $descClub = $_POST['addClubDescription'];
@@ -237,8 +210,30 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             RedirectToURL('/webfiles/views/admin/club', 5);
         }   
     }
-    // Traitement du formulaire d'ajout d'user
+    // Traitement du formulaire d'ajout de ligue
+    elseif(isset($_POST['addLeague'])){
+        if (empty(Validator($_POST))) {
+            $name = $_POST['addLeagueName'];
+            createLeague($name);
+            header('Location: /webfiles/views/admin/league');
+        } else { ?>
+            <!-- On affiche un message d'erreur -->
+            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+            <p class="danger">
+                <?php
+                    $errors = Validator($_POST);
+                    foreach ($errors as $error) { ?>
+                        <p class="danger"><?= $error ?></p>
+                    <?php }
+                ?>
+            </p>
+        <?php 
+        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+        RedirectToURL('/webfiles/views/admin/league', 5);
+        }
+    }
     elseif (isset($_POST['addUser'])) {
+        if (empty(Validator($_POST))) {
             $userName = $_POST['addUserName'];
             $firstName = $_POST['addFirstName'];
             $lastName = $_POST['addLastName'];
@@ -246,16 +241,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $password = $_POST['addPassword'];
             // On fait le hashage du mot de passe
             $password = password_hash($password, PASSWORD_ARGON2ID);
-            if (isUniquePseudo($userName)) {
-                if (isUniqueEmail($email)) {
 
-                createUser($userName, $lastName, $firstName, $email, $password); ?>
-                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
-                <div class='success flex flex-col'>
-                        <h3>Vous êtes inscrit avec succès.</h3>
-                        <p>Vous allez être redirigé vers la page de connexion</a></p>
-                </div>
-                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+            createUser($userName, $lastName, $firstName, $email, $password); ?>
+            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+            <div class='success flex flex-col'>
+                    <h3>Vous êtes inscrit avec succès.</h3>
+                    <p>Vous allez être redirigé vers la page de connexion</a></p>
+            </div>
+            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
             
                 RedirectToURL('/webfiles/views/user/connexion.php', 5);
                 } else { ?>
@@ -275,6 +268,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             }
      } else { ?>
+            RedirectToURL('/webfiles/views/user/connexion.php', 5);
+        } else { ?>
             <!-- On affiche un message d'erreur -->
             <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
             <p class="danger">
@@ -287,7 +282,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             </p>
         <?php 
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
-        RedirectToURL('/webfiles/views/admin/league', 5);
+        RedirectToURL('/webfiles/views/user/connexion.php', 5);
         }
     }
 
