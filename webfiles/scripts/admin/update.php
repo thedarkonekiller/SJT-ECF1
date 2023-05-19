@@ -1,7 +1,7 @@
 <?php
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
 function updateCountry(string $name, string $img, int $id)
 {
@@ -58,10 +58,10 @@ function updateClub(int $id, string $name, string $createDate, string $descrip, 
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et la variable name
+    // On déclare la requete sql
     $sql = "UPDATE club SET name = :name, createDate = :createDate, descrip = :descrip, logo = :logo, stadiumName = :stadium, league_id = :leagueId WHERE id = :id";
 
-    // On execute la requête
+    
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':id', $id, PDO::PARAM_INT);
@@ -138,6 +138,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $logo = $_POST['updateClubImage'];
         $stadium = $_POST['updateClubStadium'];
         $league = $_POST['updateClubLeague'];
+        $id = $_POST['updateClubId'];
         updateClub($id, $name, $createDate, $descrip, $logo, $stadium, $league);
         header('Location: /webfiles/views/admin/club');
     }

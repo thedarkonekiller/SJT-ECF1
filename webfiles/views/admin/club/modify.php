@@ -27,7 +27,7 @@ $arrayClub = getByIdClub($id);
             <input type="text" name="updateClubStadium" id="clubStadium" value="<?= $arrayClub['stadiumName'] ?>">
             <label for="clubLeague">Ligue</label>
             <select name="updateClubLeague" id="clubLeague">
-                <option value="" selected disabled>
+                <option value="<?= $arrayClub['league_id']?>" selected disabled>
                 <?php 
                 // On stocke les informations du club dont l'id a été recupéré précédemment
                 $league = getByIdLeague($arrayClub['league_id']);

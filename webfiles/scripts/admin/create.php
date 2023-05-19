@@ -275,7 +275,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
         RedirectToURL('/webfiles/views/user/connexion.php', 5);
         }
-    }
+    
 
 
 
