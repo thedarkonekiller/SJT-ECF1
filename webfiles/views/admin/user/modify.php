@@ -1,4 +1,8 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/read.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
+<?php 
+    // Si on arrive à se connecter en tant qu'administrateur
+    if ($_SESSION && $_SESSION['user']['role'] === "[ROLE_ADMIN]") {
+require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/read.php'); ?>
 
 <?php
 // Récupération de l'id de l'utilisateur à modifier et on le stocke dans $id
@@ -7,7 +11,6 @@ $id = $_POST['modifyIdUser'];
 $arrayUser = getByIdUser($id);
 ?>
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>
 <main>
     <section>
@@ -26,3 +29,12 @@ $arrayUser = getByIdUser($id);
         </form>
     </section>
 </main>
+
+<?php } 
+    // Si on arrive pas à se connecter en tant qu'administrateur
+    else { ?>
+        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_admin_header.php') ?>
+        <p class="danger">Vous n'avez pas accès à cette page</p>
+        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_admin_footer.php') ?>
+    <?php }
+?>
