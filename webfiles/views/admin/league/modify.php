@@ -13,7 +13,7 @@ $arrayLeague = getByIdLeague($id);
         <form action="/webfiles/scripts/admin/update.php" method="POST">
             <input type="hidden" name="updateLeagueId" value="<?= $arrayLeague['id'] ?>">
             <label for="leagueName">Nom</label>
-            <input type="text" name="updateNameLeague" id="leagueName" value="<?= $arrayLeague['name'] ?>">
+            <input type="text" name="updateLeagueName" id="leagueName" value="<?= $arrayLeague['name'] ?>">
             <button type="submit" name="updateLeague">Modifier</button>
         </form>
     </section>

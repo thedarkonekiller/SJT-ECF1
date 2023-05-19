@@ -13,7 +13,7 @@ $arrayClub = getByIdClub($id);
         <form class="flex flex-col" action="/webfiles/scripts/admin/update.php" method="POST">
             <input type="hidden" name="updateClubId" value="<?= $arrayClub['id'] ?>">
             <label for="clubName">Nom</label>
-            <input type="text" name="updateNameClub" id="clubName" value="<?= $arrayClub['name'] ?>">
+            <input type="text" name="updateClubName" id="clubName" value="<?= $arrayClub['name'] ?>">
             <label for="clubCreatedDate">Date de création</label>
             <input type="date" name="updateClubCreatedDate" id="clubCreatedDate" value="<?= $arrayClub['createDate'] ?>">
             <label for="clubDesc">Description</label>

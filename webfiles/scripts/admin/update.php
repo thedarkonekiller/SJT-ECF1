@@ -3,7 +3,7 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-function updateCountry(string $name, int $id)
+function updateCountry(string $name, int $id, string $img)
 {
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
@@ -115,20 +115,22 @@ function updateUser(string $name)
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     //Process the update country form
     if(isset($_POST['updateCountry'])){
-        $name = $_POST['updateNameCountry'];
-        $img = $_POST['updateImageCountry'];
+        $id = $_POST['updateContryId'];
+        $name = $_POST['updateCountryName'];
+        $img = $_POST['updateCountryImage'];
         updateCountry($name, $id, $img);
         header('Location: /webfiles/views/admin/country');
     }
     //Process the update league form
     elseif(isset($_POST['updateLeague'])){
-        $name = $_POST['updateNameLeague'];
+        $id = $_POST['updateLeagueId'];
+        $name = $_POST['updateLeagueName'];
         updateLeague($name, $id);
         header('Location: /webfiles/views/admin/league');
     }
     //Process the update club form
     elseif(isset($_POST['updateClub'])){
-        $name = $_POST['updateNameClub'];
+        $name = $_POST['updateClubName'];
         $createDate = $_POST['updateClubCreatedDate'];
         $descrip = $_POST['updateClubDescription'];
         $logo = $_POST['updateClubImage'];

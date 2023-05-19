@@ -13,8 +13,9 @@ $arrayCountry = getByIdCountry($id);
     <section>
         <h2>Modifier un pays</h2>
         <form action="/webfiles/scripts/admin/update.php" method="POST">
+            <input type="hidden" name="updateCountryId" value="<?= $arrayCountry['id'] ?>">
             <label for="countryName">Nom</label>
-            <input type="text" name="updateNameCountry" id="countryName" value="<?= $arrayCountry['name'] ?>">
+            <input type="text" name="updateCountryName" id="countryName" value="<?= $arrayCountry['name'] ?>">
             <label for="contryImage">Image</label>
             <input type="url" name="updateCountryImage" id="countryImage" value="<?= $arrayCountry['img'] ?>">
             <button type="submit" name="updateCountry">Modifier</button>
