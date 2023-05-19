@@ -19,7 +19,9 @@
             <select name="addClubLeague" id="clubLeague">
                 <option value="" selected disabled>Choisissez une ligue</option>
                 <?php 
+                  // On récupére les données de la table club qui vont etre stockés dans la variable $results
                 $leagues = getAll('league');
+                // On fait une boucle avec toute les valeurs qui seront stockés dans la variable $league
                 foreach ($leagues as $league): ?>
                     <option value="<?= $league['id'] ?>"><?= $league['name'] ?></option>
                 <?php endforeach; ?>
@@ -41,7 +43,9 @@
             </thead>
             <tbody>
                 <?php
+                // On récupére les données de la table club qui vont etre stockés dans la variable $results
                 $results = getAll('club');
+                // On fait une boucle avec toute les valeurs qui seront stockés dans la variable $result
                 foreach ($results as $result) { ?>
                     <tr class="flex">
                         <td><?= $result['name']; ?></td>
