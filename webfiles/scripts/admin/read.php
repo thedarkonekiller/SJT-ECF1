@@ -163,3 +163,24 @@ function getByIdUser(int $id): array
         exit; //Stop the script in case of error
     }
 }
+function getClubNameByLeague(int $leagueId): array
+{
+    require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
+
+    $sql = "SELECT name FROM club WHERE league_id = :leagueId";
+
+    try {
+        $query = $conn->prepare($sql);
+        $query->bindParam(':leagueId', $leagueId, PDO::PARAM_INT);
+        $results = $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    } catch (Exception $e) {
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
+    }
+}

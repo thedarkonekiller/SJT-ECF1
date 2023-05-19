@@ -7,7 +7,7 @@
         <form action="/webfiles/scripts/admin/create.php" method="POST" class="flex flex-col">
             <label for="leagueName">Nom</label>
             <input type="text" name="addLeagueName" id="leagueName">
-            
+
             <label for="leagueCountry">Pays</label>
             <select name="addLeagueCountry" id="leagueCountry">
                 <option value="" selected disabled>Choisissez un pays</option>
@@ -16,8 +16,8 @@
                 foreach ($countries as $country) : ?>
                     <option value="<?= $country['id'] ?>"><?= $country['name'] ?></option>
                 <?php endforeach; ?>
-                </select>
-            
+            </select>
+
             <button type="submit" name="addLeague">Ajouter</button>
         </form>
     </section>
