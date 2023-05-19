@@ -94,10 +94,10 @@ function updateUser(string $name, string $userEmail, string $userLastName, strin
     // On execute la requête
     try{ 
         $req = $conn->prepare($sql);
-        $req->bindParam(':username', $name, PDO::PARAM_STR);
-        $req->bindParam(':email', $userEmail, PDO::PARAM_STR);
-        $req->bindParam(':lastName', $userLastName, PDO::PARAM_STR);
-        $req->bindParam(':firstName', $userFirstName, PDO::PARAM_STR);
+        $req->bindParam(':name', $name, PDO::PARAM_STR);
+        $req->bindParam(':userEmail', $userEmail, PDO::PARAM_STR);
+        $req->bindParam(':userLastName', $userLastName, PDO::PARAM_STR);
+        $req->bindParam(':userFirstName', $userFirstName, PDO::PARAM_STR);
         $req->bindParam(':id', $id, PDO::PARAM_INT);
         $req->execute();
     } catch (Exception $e) {
