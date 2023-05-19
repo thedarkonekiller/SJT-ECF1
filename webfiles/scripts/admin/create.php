@@ -39,17 +39,18 @@ function createCountry(string $name, string $img){
  * @param string $league
  * @return void
  */
-function createLeague(string $league){
+function createLeague(string $league, int $country){
     //We import the connection file to the database
     require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
     //We prepare the request and the variables nameclub, createclub, locstade, imgclub, paragclub.
-    $sql = "INSERT INTO league (name) VALUES (:league)";
+    $sql = "INSERT INTO league (name, country_id) VALUES (:league, :country)";
 
     //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':league', $league, PDO::PARAM_STR);
+        $req->bindParam(':country', $country, PDO::PARAM_INT);
         $req->execute();
         
     } catch (Exception $e) {
@@ -191,7 +192,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     elseif(isset($_POST['addLeague'])){
         if (empty(Validator($_POST))) {
             $name = $_POST['addLeagueName'];
-            createLeague($name);
+            $country = $_POST['addLeagueCountry'];
+            createLeague($name, $country);
             header('Location: /webfiles/views/admin/league');
         } else { ?>
             <!-- On affiche un message d'erreur -->
@@ -235,29 +237,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             RedirectToURL('/webfiles/views/admin/club', 5);
         }   
     }
-    // Traitement du formulaire d'ajout de ligue
-    elseif(isset($_POST['addLeague'])){
-        if (empty(Validator($_POST))) {
-            $name = $_POST['addLeagueName'];
-            createLeague($name);
-            header('Location: /webfiles/views/admin/league');
-        } else { ?>
-            <!-- On affiche un message d'erreur -->
-            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
-            <p class="danger">
-                <?php
-                    $errors = Validator($_POST);
-                    foreach ($errors as $error) { ?>
-                        <p class="danger"><?= $error ?></p>
-                    <?php }
-                ?>
-            </p>
-        <?php 
-        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
-        RedirectToURL('/webfiles/views/admin/league', 5);
-        }
-    }
-        // Traitement du formulaire d'ajout d'user
+    // Traitement du formulaire d'ajout d'user
     elseif (isset($_POST['addUser'])) {
         if (empty(Validator($_POST))) {
             $userName = $_POST['addUserName'];
