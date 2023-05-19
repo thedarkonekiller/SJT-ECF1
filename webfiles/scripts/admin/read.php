@@ -206,3 +206,25 @@ function getLeagueNameByCountry(int $countryId): array
         exit; //Stop the script in case of error
     }
 }
+
+function getCountryImageByLeague(int $countryId): array
+{
+    require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
+
+    $sql = "SELECT c.img FROM country AS c INNER JOIN league AS l ON c.id = l.country_id WHERE c.id = :countryId";
+
+    try {
+        $query = $conn->prepare($sql);
+        $query->bindParam(':countryId', $countryId, PDO::PARAM_INT);
+        $query->execute();
+        $results = $query->fetch(PDO::FETCH_ASSOC);
+        return $results;
+    } catch (Exception $e) {
+        // Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        // Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; // Stop the script in case of error
+    }
+}

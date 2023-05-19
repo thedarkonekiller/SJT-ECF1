@@ -7,6 +7,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/read.php'); ?>
 <?php
 $id = $_POST['modifyIdClub'];
 $arrayClub = getByIdClub($id);
+var_dump($arrayClub['league_id']);
 ?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>

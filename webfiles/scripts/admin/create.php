@@ -226,7 +226,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     }
     elseif (isset($_POST['addUser'])) {
-        if (empty(Validator($_POST))) {
+        $errors = Validator($_POST);
+    
+        if (empty($errors)) {
             $userName = $_POST['addUserName'];
             $firstName = $_POST['addFirstName'];
             $lastName = $_POST['addLastName'];
@@ -234,48 +236,50 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $password = $_POST['addPassword'];
             // On fait le hashage du mot de passe
             $password = password_hash($password, PASSWORD_ARGON2ID);
-
-            createUser($userName, $lastName, $firstName, $email, $password); ?>
-            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
-            <div class='success flex flex-col'>
-                    <h3>Vous êtes inscrit avec succès.</h3>
-                    <p>Vous allez être redirigé vers la page de connexion</a></p>
-            </div>
-            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
-            
-                RedirectToURL('/webfiles/views/user/connexion.php', 5);
-                } else { ?>
-                    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
-                    <div class='danger flex flex-col'>
-                            <h3>L'email existe déjà !</h3>
-                    </div>
-                    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
-
-                }
-            } else { ?>
-                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
-                <div class='danger flex flex-col'>
-                        <h3>Le pseudo existe déjà !</h3>
+    
+            // Vérifier si le pseudo existe déjà
+            if (isUniquePseudo($userName)) {
+                require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php');
+                ?>
+                <div class="danger flex flex-col">
+                    <h3>Le pseudo existe déjà !</h3>
                 </div>
                 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
-
             }
-} else { ?>
-            <!-- On affiche un message d'erreur -->
-            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
-            <p class="danger">
-                <?php
-                    $errors = Validator($_POST);
-                    foreach ($errors as $error) { ?>
-                        <p class="danger"><?= $error ?></p>
-                    <?php }
+            // Vérifier si l'email existe déjà
+            elseif (isUniqueEmail($email)) {
+                require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php');
                 ?>
-            </p>
-        <?php 
-        require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
-        RedirectToURL('/webfiles/views/user/connexion.php', 5);
-        }
+                <div class="danger flex flex-col">
+                    <h3>L'email existe déjà !</h3>
+                </div>
+                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+            }
+            // Créer l'utilisateur
+            else {
+                createUser($userName, $lastName, $firstName, $email, $password);
     
+                require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php');
+                ?>
+                <div class="success flex flex-col">
+                    <h3>Vous êtes inscrit avec succès.</h3>
+                    <p>Vous allez être redirigé vers la page de connexion</p>
+                </div>
+                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+    
+                RedirectToURL('/webfiles/views/user/connexion.php', 5);
+            }
+        } else {
+            require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php');?>
+            <div class="danger flex flex-col">
+                <?php foreach ($errors as $error) {
+                    echo '<h3>' . $error . '</h3>';
+                } ?>
+            </div>
+            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+    
+            RedirectToURL('/webfiles/views/admin/index.php', 5);
+        }
 
 
 
