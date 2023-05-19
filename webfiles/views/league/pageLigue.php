@@ -10,7 +10,11 @@ $leagues = getAll('league');
         foreach ($leagues as $league) : ?>
             <section class="card">
                 <h2><?= $league['name']; ?></h2>
-                <img src="<?= $league['img']; ?>" alt="Image de <?= $league['name']; ?>">
+                <?php 
+                    $countriesImg = getCountryImageByleague($league['country_id']);
+                    foreach ($countriesImg as $img): ?>
+                        <img src="<?= $img ?>" alt="Image de">
+                    <?php endforeach; ?>
                 <h2>Liste des clubs</h2>
                 <table>
                     <thead>

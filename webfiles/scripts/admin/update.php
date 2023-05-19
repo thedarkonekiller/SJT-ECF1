@@ -133,6 +133,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
     //Process the update club form
     elseif(isset($_POST['updateClub'])){
+        $id = $_POST['updateClubId'];
         $name = $_POST['updateClubName'];
         $createDate = $_POST['updateClubCreatedDate'];
         $descrip = $_POST['updateClubDescription'];
