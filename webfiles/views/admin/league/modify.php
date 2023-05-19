@@ -18,16 +18,16 @@ $arrayLeague = getByIdLeague($id);
             <label for="leagueCountry">Pays</label>
             <select name="addLeagueCountry" id="leagueCountry">
                 <option value="<?= $arrayLeague['country_id'] ?>" selected disabled>
-                <?php
+                    <?php
                     $countryName = getByIdCountry($arrayLeague['country_id']);
                     echo $countryName['name'];
-                ?>
+                    ?>
                 </option>
                 <?php
                 foreach ($countries as $country) : ?>
                     <option value="<?= $country['id'] ?>"><?= $country['name'] ?></option>
                 <?php endforeach; ?>
-                </select>
+            </select>
             <button type="submit" name="updateLeague">Modifier</button>
         </form>
     </section>
