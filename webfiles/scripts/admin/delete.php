@@ -1,91 +1,157 @@
 <?php
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
+/**
+ *Allows you to delete a country
+ *
+ *@param integer $id
+ *@return void
+ */
 function deleteCountry(int $id){
-    // On importe le fichier de connexion à la base de donnée
+    //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et la variable id
+    //We prepare the request and the id variable
     $sql = "DELETE FROM country WHERE id = :id";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':id', $id, PDO::PARAM_INT);
         $req->execute();
         
     } catch (Exception $e) {
-        //On affiche un message en cas d'erreur
-        echo 'Erreur: ' . $e->getMessage();
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
     }
 }
+
+/**
+ *Allows you to delete a league
+ *
+ *@param integer $id
+ *@return void
+ */
 function deleteLeague(int $id){
-    // On importe le fichier de connexion à la base de donnée
+    //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et la variable id
+    //We prepare the request and the id variable
     $sql = "DELETE FROM league WHERE id = :id";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':id', $id, PDO::PARAM_INT);
         $req->execute();
         
     } catch (Exception $e) {
-        //On affiche un message en cas d'erreur
-        echo 'Erreur: ' . $e->getMessage();
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
     }
 }
+
+/**
+ *Allows you to delete a club
+ *
+ *@param integer $id
+ *@return void
+ */
 function deleteClub(int $id){
-    // On importe le fichier de connexion à la base de donnée
+    //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et la variable id
+    //We prepare the request and the id variable
     $sql = "DELETE FROM club WHERE id = :id";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':id', $id, PDO::PARAM_INT);
         $req->execute();
         
     } catch (Exception $e) {
-        //On affiche un message en cas d'erreur
-        echo 'Erreur: ' . $e->getMessage();
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
     }
 }
+
+/**
+ *Allows you to delete a user
+ *
+ *@param integer $id
+ *@return void
+ */
 function deleteUser(int $id){
-    // On importe le fichier de connexion à la base de données
+    //Import the database connection file
     require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
 
-    // On prépare la requête et la variable id
+    //We prepare the request and the id variable
     $sql = "DELETE FROM user WHERE id = :id";
 
-    // On execute la requête
+    //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':id', $id, PDO::PARAM_INT);
         $req->execute();
         
     } catch (Exception $e) {
-        //On affiche un message en cas d'erreur
-        echo 'Erreur: ' . $e->getMessage();
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
     }
 }
 
-// On vérifie si une valeur est soumise avec le nom de champ
-if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdClub']){
-    // On récupére la valeur soumise avec le nom du champ
-    $id = $_POST['deleteIdClub'];
-    // On appelle la fonction tout en passant par la valeur des identifiants
-    deleteClub($id);
-    header('Location: /webfiles/views/admin/club');
-}
-// On vérifie si une valeur est soumise avec le nom de champ
-if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['deleteIdLeague']){
-     // On récupére la valeur soumise avec le nom du champ
-    $id = $_POST['deleteIdLeague'];
-     // On appelle la fonction tout en passant par la valeur des identifiants
-    deleteLeague($id);
-    header('Location: /webfiles/views/admin/league');
+
+//And he has a $_POST
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    //Process the country deletion form
+    if(isset($_POST['deleteCountry'])){
+        //Retrieve the submitted value with the name of the field
+        $id = $_POST['deleteIdCountry'];
+        //We call the function while passing through the value of the identifiers
+        deleteClub($id);
+        header('Location: /webfiles/views/admin/country');
+    }
+    //Process the league deletion form
+    elseif(isset($_POST['deleteLeague'])){
+        //Retrieve the submitted value with the name of the field
+        $id = $_POST['deleteIdLeague'];
+        //We call the function while passing through the value of the identifiers
+        deleteLeague($id);
+        header('Location: /webfiles/views/admin/league');
+    }
+    //Process the club deletion form
+    elseif(isset($_POST['deleteClub'])){
+        //Retrieve the submitted value with the name of the field
+        $id = $_POST['deleteIdClub'];
+        //We call the function while passing through the value of the identifiers
+        deleteClub($id);
+        header('Location: /webfiles/views/admin/club');
+    }
+    //Process the user deletion form
+    elseif(isset($_POST['deleteUser'])){
+        //Retrieve the submitted value with the name of the field
+        $id = $_POST['deleteIdUser'];
+        //We call the function while passing through the value of the identifiers
+        deleteUser($id);
+        header('Location: /webfiles/views/admin/user');
+    }
 }

@@ -1,13 +1,24 @@
 <?php
-
+/**
+ * Permet de retarder une redirection
+ *
+ * @param [type] $url
+ * @param integer $waitmsg
+ * @return void
+ */
 function RedirectToURL($url, $waitmsg = 1)
 {
     header("Refresh:$waitmsg; URL=$url");
     exit;
 }
 
-
-function Validator($array)
+/**
+ * Permet de vérifier l'intégrité des champs d'un formulaire
+ *
+ * @param [type] $array
+ * @return array
+ */
+function Validator($array): array
 {
 
     //protection XSS

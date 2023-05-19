@@ -1,86 +1,165 @@
 <?php
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
-function getAll(string $table){
-    
-    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-        // On prépare notre requete
-        $sql = "SELECT * FROM $table";
 
-        try {
-            $query = $conn->query($sql);
-            $results = $query->fetchAll(PDO::FETCH_ASSOC);    
-            return $results;
-        } catch (Exception $e) {
-            //On affiche un message en cas d'erreur
-            echo 'Erreur: ' . $e->getMessage();
-        }
-    
+/**
+ *Allows to recover all the contents of a table
+ *
+ *@param string $table
+ *@return array
+ */
+function getAll(string $table): array
+{
+    //List of authorized tables
+    $allowedTables = ['country', 'league', 'club', 'user'];
+
+    //Check if the table is authorized
+    if (!in_array($table, $allowedTables)) {
+        //We display an error message
+        echo 'La table spécifiée n\'est pas autorisée.';
+        exit;
     }
+    require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
 
+    try {
+        //We prepare our request
+        $sql = "SELECT * FROM {$table}";
+        $query = $conn->prepare($sql);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    } catch (PDOException $e) {
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
 
-
-function getByIdCountry(int $id){
-
-    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-        // On prépare notre requete
-        $sql = "SELECT * FROM country WHERE id = :id";
-
-        try {
-            $query = $conn->prepare($sql);
-            $query->bindParam(':id', $id, PDO::PARAM_INT);
-            $results = $query->execute();
-            $results = $query->fetch(PDO::FETCH_ASSOC);
-
-            return $results;
-
-        } catch (Exception $e) {
-            //On affiche un message en cas d'erreur
-            echo 'Erreur: ' . $e->getMessage();
-        }
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
     }
-    
+}
+/**
+ *Allows you to retrieve information
+ *of a country
+ *
+ *@param integer $id
+ *@return array
+ */
+function getByIdCountry(int $id): array
+{
 
-function getByIdLeague(int $id){
+    require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
+    //We prepare our query
+    $sql = "SELECT * FROM country WHERE id = :id";
 
-    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-        // On sélectionne notre requete
-        $sql = "SELECT * FROM league WHERE id = :id";
+    try {
+        $query = $conn->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $results = $query->execute();
+        $results = $query->fetch(PDO::FETCH_ASSOC);
 
-        try {
-            // On prépare la requete
-            $query = $conn->prepare($sql);
-            // On lie la valeur de l'identifiant au paramétre id
-            $query->bindParam(':id', $id, PDO::PARAM_INT);
-            // On éxécute la requete 
-            $results = $query->execute();
-            // On récupére le résultat de la requete
-            $results = $query->fetch(PDO::FETCH_ASSOC);
+        return $results;
+    } catch (Exception $e) {
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
 
-            return $results;
-
-        } catch (Exception $e) {
-            //On affiche un message en cas d'erreur
-            echo 'Erreur: ' . $e->getMessage();
-        }
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
     }
-    
+}
+/**
+ *Allows you to retrieve information
+ *of a league
+ *
+ *@param integer $id
+ *@return array
+ */
+function getByIdLeague(int $id): array
+{
 
-    function getByIdClub(int $id){
-    
-        require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-            
-            $sql = "SELECT * FROM club WHERE id = :id";
-    
-            try {
-                $query = $conn->prepare($sql);
-                $query->bindParam(':id', $id, PDO::PARAM_INT);
-                $results = $query->execute();
-                $results = $query->fetch(PDO::FETCH_ASSOC);
-    
-                return $results;
-    
-            } catch (Exception $e) {
-                //On affiche un message en cas d'erreur
-                echo 'Erreur: ' . $e->getMessage();
-            }
-        }
+    require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
+    //We select our query
+    $sql = "SELECT * FROM league WHERE id = :id";
+
+    try {
+        //We prepare the request
+        $query = $conn->prepare($sql);
+        //We bind the value of the identifier to the id parameter
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        //Execute the query
+        $results = $query->execute();
+        //Retrieve the result of the query
+        $results = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $results;
+    } catch (Exception $e) {
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
+    }
+}
+/**
+ *Allows you to retrieve information
+ *from a club
+ *
+ *@param integer $id
+ *@return array
+ */
+function getByIdClub(int $id): array
+{
+
+    require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
+
+    $sql = "SELECT * FROM club WHERE id = :id";
+
+    try {
+        $query = $conn->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $results = $query->execute();
+        $results = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $results;
+    } catch (Exception $e) {
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
+    }
+}
+/**
+ *Allows you to retrieve information
+ *of a user
+ *
+ *@param integer $id
+ *@return array
+ */
+function getByIdUser(int $id): array
+{
+
+    require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
+
+    $sql = "SELECT * FROM user WHERE id = :id";
+
+    try {
+        $query = $conn->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $results = $query->execute();
+        $results = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $results;
+    } catch (Exception $e) {
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
+    }
+}
