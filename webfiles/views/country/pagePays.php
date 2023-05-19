@@ -19,14 +19,13 @@ $countries = getAll('country');
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <?php
-                                $league = getByIdLeague($country['league_id']);
-                                echo $league['name'];
-                                ?>
-                            </td>
-                        </tr>
+                        <?php
+                        $leagueNames = getLeagueNameByCountry($country['id']);
+                        foreach ($leagueNames as $name) : ?>
+                            <tr>
+                                <td><?= $ligueName[['name']]; ?></td>
+                            </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </section>

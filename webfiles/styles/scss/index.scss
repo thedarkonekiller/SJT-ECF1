@@ -137,6 +137,8 @@ body {
             }
 
             section.card {
+                width: 300px;
+                height: 500px;
                 background: $bgCard;
                 color: $primaryTextColor;
                 display: grid;
@@ -153,14 +155,18 @@ body {
 
                 h2:nth-of-type(1) {
                     grid-area: name;
+                    margin: 1rem auto;
                 }
 
                 img {
                     grid-area: image;
+                    width: 300px;
+                    height: 300px;
                 }
 
                 h2:nth-of-type(2) {
                     grid-area: leagueTitle;
+                    margin: 0 auto;
                 }
                 table {
                     grid-area: leagues;

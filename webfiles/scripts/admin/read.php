@@ -184,3 +184,25 @@ function getClubNameByLeague(int $leagueId): array
         exit; //Stop the script in case of error
     }
 }
+
+function getLeagueNameByCountry(int $countryId): array
+{
+    require($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
+
+    $sql = "SELECT name FROM league WHERE country_id = :countryId";
+
+    try {
+        $query = $conn->prepare($sql);
+        $query->bindParam(':countryId', $countryId, PDO::PARAM_INT);
+        $results = $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    } catch (Exception $e) {
+        //Error log
+        error_log('Erreur lors de l\'exécution de la requête SQL : ' . $e->getMessage());
+
+        //Display a generic message to the user
+        echo 'Une erreur est survenue lors du traitement de la requête. Veuillez réessayer ultérieurement.';
+        exit; //Stop the script in case of error
+    }
+}

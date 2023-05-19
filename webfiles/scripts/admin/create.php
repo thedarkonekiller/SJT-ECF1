@@ -91,40 +91,6 @@ function createClub(string $name, string $createClub, string $descClub, string $
     }
 }
 
-/**
- * Permet de créer un joueur
- *
- * @param string $firstName
- * @param string $lastName
- * @param string $nationalite
- * @param string $poste
- * @param string $birthday
- * @param string $playerPic
- * @return void
- */
-function createPlayer(string $firstName, string $lastName, string $nationalite, string $poste, string $birthday, string $playerPic){
-    //Import the database connection file
-    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-
-    //We prepare the request and the variables firstname, lastname, nationality, position, birthday, playerpic.
-    $sql = "INSERT INTO player (firstname , lastname , nationalite , poste , birthday , playerpic) VALUES (:firstName , :lastName, :nationalite, :poste, :birthday; :playerPic)";
-
-    //Execute the query
-    try {
-        $req = $conn->prepare($sql);
-        $req->bindParam(':firstName', $firstName, PDO::PARAM_STR);
-        $req->bindParam(':lastName', $lastName, PDO::PARAM_STR);
-        $req->bindParam(':nationalite', $nationalite, PDO::PARAM_STR);
-        $req->bindParam(':poste', $poste, PDO::PARAM_STR);
-        $req->bindParam(':birthday', $birthday, PDO::PARAM_STR);
-        $req->bindParam(':playerPic', $playerPic, PDO::PARAM_STR);
-        $req->execute();
-        
-    } catch (Exception $e) {
-        //We display a message in case of error
-        echo 'Erreur: ' . $e->getMessage();
-    }
-}
 
 /**
  * Permet de créer un utilisateur
@@ -267,9 +233,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
 
             }
-     } else { ?>
-            RedirectToURL('/webfiles/views/user/connexion.php', 5);
-        } else { ?>
+} else { ?>
             <!-- On affiche un message d'erreur -->
             <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
             <p class="danger">
@@ -284,7 +248,3 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
         RedirectToURL('/webfiles/views/user/connexion.php', 5);
         }
-    }
-
-
-

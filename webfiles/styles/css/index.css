@@ -100,6 +100,8 @@ body main.country h1 {
   text-shadow: 2px 2px 4px black;
 }
 body main.country section.card {
+  width: 300px;
+  height: 500px;
   background: rgb(164, 16, 16);
   color: white;
   display: grid;
@@ -112,12 +114,16 @@ body main.country section.card {
 }
 body main.country section.card h2:nth-of-type(1) {
   grid-area: name;
+  margin: 1rem auto;
 }
 body main.country section.card img {
   grid-area: image;
+  width: 300px;
+  height: 300px;
 }
 body main.country section.card h2:nth-of-type(2) {
   grid-area: leagueTitle;
+  margin: 0 auto;
 }
 body main.country section.card table {
   grid-area: leagues;
