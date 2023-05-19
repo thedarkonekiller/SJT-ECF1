@@ -20,13 +20,5 @@
                 <i class="fa-solid fa-shield-halved"></i>
                 <a href="/webfiles/views/admin/club/index.php" title="">Clubs</a>
             </div>
-            <div class="flex">
-                <i class="fa-solid fa-people-group"></i>
-                <a href="/webfiles/views/admin/team/index.php" title="">Equipes</a>
-            </div>
-            <div class="flex">
-                <i class="fa-solid fa-socks"></i>
-                <a href="/webfiles/views/admin/player/index.php" title="">Joueurs</a>
-            </div>
     </nav>
 </aside>

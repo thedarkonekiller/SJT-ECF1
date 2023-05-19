@@ -47,7 +47,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     <li><a href="/webfiles/views/country/pagePays.php">Pays</a></li>
                     <li><a href="/webfiles/views/league/pageLigue.php">Ligues</a></li>
                     <li><a href="/webfiles/views/club/pageClub.php">Clubs</a></li>
-                    <li><a href="/webfiles/views/player/pageJoueur.php">Joueurs</a></li>
                 </ul>
             </nav>
         </div>
