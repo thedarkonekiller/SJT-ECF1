@@ -89,10 +89,10 @@ function updateUser(string $name, string $userEmail, string $userLastName, strin
     require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
 
     // On prépare la requête et la variable name
-    $sql = "UPDATE user SET username = ':name', email = ':userEmail', lastName = ':userLastName', firstName = ':userFirstName' WHERE id = ':id'";
+    $sql = "UPDATE user SET username = :name, email = :userEmail, lastName = :userLastName, firstName = :userFirstName WHERE id = :id";
 
     // On execute la requête
-    try {
+    try{ 
         $req = $conn->prepare($sql);
         $req->bindParam(':username', $name, PDO::PARAM_STR);
         $req->bindParam(':email', $userEmail, PDO::PARAM_STR);
