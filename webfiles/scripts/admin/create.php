@@ -37,17 +37,18 @@ function createCountry(string $name){
  * @param string $league
  * @return void
  */
-function createLeague(string $league){
+function createLeague(string $league, int $country){
     //We import the connection file to the database
     require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
     
     //We prepare the request and the variables nameclub, createclub, locstade, imgclub, paragclub.
-    $sql = "INSERT INTO league (name) VALUES (:league)";
+    $sql = "INSERT INTO league (name, country_id) VALUES (:league, :country)";
 
     //Execute the query
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':league', $league, PDO::PARAM_STR);
+        $req->bindParam(':country', $country, PDO::PARAM_INT);
         $req->execute();
         
     } catch (Exception $e) {
@@ -91,40 +92,6 @@ function createClub(string $name, string $createClub, string $descClub, string $
     }
 }
 
-/**
- * Permet de créer un joueur
- *
- * @param string $firstName
- * @param string $lastName
- * @param string $nationalite
- * @param string $poste
- * @param string $birthday
- * @param string $playerPic
- * @return void
- */
-function createPlayer(string $firstName, string $lastName, string $nationalite, string $poste, string $birthday, string $playerPic){
-    //Import the database connection file
-    require($_SERVER['DOCUMENT_ROOT'].'/webfiles/scripts/admin/dbconnect.php');
-
-    //We prepare the request and the variables firstname, lastname, nationality, position, birthday, playerpic.
-    $sql = "INSERT INTO player (firstname , lastname , nationalite , poste , birthday , playerpic) VALUES (:firstName , :lastName, :nationalite, :poste, :birthday; :playerPic)";
-
-    //Execute the query
-    try {
-        $req = $conn->prepare($sql);
-        $req->bindParam(':firstName', $firstName, PDO::PARAM_STR);
-        $req->bindParam(':lastName', $lastName, PDO::PARAM_STR);
-        $req->bindParam(':nationalite', $nationalite, PDO::PARAM_STR);
-        $req->bindParam(':poste', $poste, PDO::PARAM_STR);
-        $req->bindParam(':birthday', $birthday, PDO::PARAM_STR);
-        $req->bindParam(':playerPic', $playerPic, PDO::PARAM_STR);
-        $req->execute();
-        
-    } catch (Exception $e) {
-        //We display a message in case of error
-        echo 'Erreur: ' . $e->getMessage();
-    }
-}
 
 /**
  * Permet de créer un utilisateur
@@ -162,10 +129,34 @@ function createUser(string $userName, string $lastName, string $firstName, strin
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        //Process the add country form
+        if(isset($_POST['addCountry'])){
+            if (empty(Validator($_POST))) {
+                $name = $_POST['addCountryName'];
+                $img = $_POST['addCountryImage'];
+                createCountry($name, $img);
+                header('Location: /webfiles/views/admin/country');
+            } else { ?>
+                <!--An error message is displayed -->
+                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+                <p class="danger">
+                    <?php
+                        $errors = Validator($_POST);
+                        foreach ($errors as $error) { ?>
+                            <p class="danger"><?= $error ?></p>
+                        <?php }
+                    ?>
+                </p>
+            <?php 
+            require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+            RedirectToURL('/webfiles/views/admin/country', 5);
+            }
+        }
     // Traitement du formulaire d'ajout de ligue
     if(isset($_POST['addLeague'])){
         if (empty(Validator($_POST))) {
             $name = $_POST['addLeagueName'];
+            $country = $_POST['addLeagueCountry'];
             createLeague($name);
             header('Location: /webfiles/views/admin/league');
         } else { ?>
@@ -267,9 +258,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
 
             }
-     } else { ?>
-            RedirectToURL('/webfiles/views/user/connexion.php', 5);
-        } else { ?>
+} else { ?>
             <!-- On affiche un message d'erreur -->
             <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
             <p class="danger">
@@ -284,7 +273,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
         RedirectToURL('/webfiles/views/user/connexion.php', 5);
         }
-    }
+
 
 
 
