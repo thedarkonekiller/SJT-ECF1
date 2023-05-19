@@ -213,7 +213,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
     // Traitement du formulaire d'ajout de club
     elseif(isset($_POST['addClub'])){
-        if (empty(Validator($_POST))) {
+        if (protectXSS($_POST)) {
             $name = $_POST['addClubName'];
             $createClub = $_POST['addCludCreatedDate'];
             $descClub = $_POST['addClubDescription'];
@@ -239,7 +239,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
     // Traitement du formulaire d'ajout d'user
     elseif (isset($_POST['addUser'])) {
-        if (empty(Validator($_POST))) {
             $userName = $_POST['addUserName'];
             $firstName = $_POST['addFirstName'];
             $lastName = $_POST['addLastName'];
@@ -247,16 +246,34 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $password = $_POST['addPassword'];
             // On fait le hashage du mot de passe
             $password = password_hash($password, PASSWORD_ARGON2ID);
+            if (isUniquePseudo($userName)) {
+                if (isUniqueEmail($email)) {
 
-            createUser($userName, $lastName, $firstName, $email, $password); ?>
-            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
-            <div class='success flex flex-col'>
-                    <h3>Vous êtes inscrit avec succès.</h3>
-                    <p>Vous allez être redirigé vers la page de connexion</a></p>
-            </div>
-            <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+                createUser($userName, $lastName, $firstName, $email, $password); ?>
+                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+                <div class='success flex flex-col'>
+                        <h3>Vous êtes inscrit avec succès.</h3>
+                        <p>Vous allez être redirigé vers la page de connexion</a></p>
+                </div>
+                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
             
-            RedirectToURL('/webfiles/views/user/connexion.php', 5);
+                RedirectToURL('/webfiles/views/user/connexion.php', 5);
+                } else { ?>
+                    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+                    <div class='danger flex flex-col'>
+                            <h3>L'email existe déjà !</h3>
+                    </div>
+                    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+
+                }
+            } else { ?>
+                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>
+                <div class='danger flex flex-col'>
+                        <h3>Le pseudo existe déjà !</h3>
+                </div>
+                <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_footer.php');
+
+            }
         } else { ?>
             <!-- On affiche un message d'erreur -->
             <?php require_once($_SERVER['DOCUMENT_ROOT'].'/webfiles/views/_included/_header.php'); ?>

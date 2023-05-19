@@ -83,7 +83,7 @@ function updateClub(int $id, string $name, string $createDate, string $descrip, 
 }
 
 
-function updateUser(string $name)
+function updateUser(string $name, string $userEmail, string $userLastName, string $userFirstName, int $id)
 {
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
@@ -141,5 +141,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $league = $_POST['updateClubLeague'];
         updateClub($id, $name, $createDate, $descrip, $logo, $stadium, $league);
         header('Location: /webfiles/views/admin/club');
+    }
+     //Process the update user form
+    elseif(isset($_POST['updateUser'])){
+        $name = $_POST['updateUserName'];
+        $userEmail = $_POST['updateUserEmail'];
+        $userLastName = $_POST['updateUserLastName'];
+        $userFirstName = $_POST['updateUserFirstName'];
+        $id = $_POST['updateUserId'];
+        updateUser($name, $userEmail, $userLastName, $userFirstName, $id);
+        header('Location: /webfiles/views/admin/user');
     }
 }

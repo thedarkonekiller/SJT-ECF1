@@ -5,7 +5,6 @@ $id = $_POST['modifyIdLeague'];
 $arrayLeague = getByIdLeague($id);
 ?>
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/read.php'); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_header.php') ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside.php') ?>
 <?php $countries = getAll('country'); ?>

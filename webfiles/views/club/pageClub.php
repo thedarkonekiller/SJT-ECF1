@@ -2,6 +2,7 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/read.php') ?>
 <?php
     $clubs = getAll('club');
+    
 ?>
 <main class="flex flex-col country">
     <h1>Les pays</h1>
