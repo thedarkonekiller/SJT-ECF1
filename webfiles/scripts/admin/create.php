@@ -93,6 +93,7 @@ function createClub(string $name, string $createClub, string $descClub, string $
 }
 
 
+
 /**
  * Permet de créer un utilisateur
  *
@@ -280,14 +281,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             RedirectToURL('/webfiles/views/admin/index.php', 5);
         }
     }
-}
-    
-    
-    
-    
-    
-    
-
 
 
 
