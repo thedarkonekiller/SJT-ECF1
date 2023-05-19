@@ -149,7 +149,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_POST['addCountry'])){
         if (empty(Validator($_POST))) {
             $name = $_POST['addCountryName'];
-            createCountry($name);
+            $img = $_POST['addCountryImage'];
+            createCountry($name, $img);
             header('Location: /webfiles/views/admin/country');
         } else { ?>
             <!--An error message is displayed -->
