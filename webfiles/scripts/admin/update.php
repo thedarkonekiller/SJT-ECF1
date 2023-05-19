@@ -3,18 +3,20 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-function updateCountry(string $name)
+function updateCountry(string $name, int $id)
 {
     // On importe le fichier de connexion à la base de donnée
     require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/dbconnect.php');
 
     // On prépare la requête et la variable name
-    $sql = "UPDATE country SET name = :name";
+    $sql = "UPDATE country SET name = :name, img = :img WHERE id = :id";
 
     // On execute la requête
     try {
         $req = $conn->prepare($sql);
         $req->bindParam(':name', $name, PDO::PARAM_STR);
+        $req->bindParam(':id', $id, PDO::PARAM_INT);
+        $req->bindParam(':img', $img, PDO::PARAM_INT);
         $req->execute();
     } catch (Exception $e) {
         //Error log
@@ -114,7 +116,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     //Process the update country form
     if(isset($_POST['updateCountry'])){
         $name = $_POST['updateNameCountry'];
-        updateCountry($name);
+        $img = $_POST['updateImageCountry'];
+        updateCountry($name, $id, $img);
         header('Location: /webfiles/views/admin/country');
     }
     //Process the update league form

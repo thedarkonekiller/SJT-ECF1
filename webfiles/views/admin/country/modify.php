@@ -1,7 +1,9 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/scripts/admin/read.php'); ?>
 
 <?php
+// Récupération de l'id du pays à modifier et on le stocke dans $id
 $id = $_POST['modifyIdCountry'];
+// On stocke les informations du pays dont l'id a été recupéré précédemment
 $arrayCountry = getByIdCountry($id);
 ?>
 
