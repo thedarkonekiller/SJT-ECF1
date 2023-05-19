@@ -157,7 +157,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if (empty(Validator($_POST))) {
             $name = $_POST['addLeagueName'];
             $country = $_POST['addLeagueCountry'];
-            createLeague($name);
+            createLeague($name, $country);
             header('Location: /webfiles/views/admin/league');
         } else { ?>
             <!-- On affiche un message d'erreur -->
@@ -205,7 +205,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     elseif(isset($_POST['addLeague'])){
         if (empty(Validator($_POST))) {
             $name = $_POST['addLeagueName'];
-            createLeague($name);
+            $country = $_POST['addLeagueCountry'];
+            createLeague($name, $country);
             header('Location: /webfiles/views/admin/league');
         } else { ?>
             <!-- On affiche un message d'erreur -->
