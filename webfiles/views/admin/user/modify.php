@@ -21,10 +21,16 @@ $arrayUser = getByIdUser($id);
             <input type="text" name="updateUserName" id="userName" value="<?= $arrayUser['username'] ?>">
             <label for="userEmail">Email</label>
             <input type="email" name="updateUserEmail" id="userEmail" value="<?= $arrayUser['email'] ?>">
-            <label for="userLastName">Nom de famille</label>
-            <input type="text" name="updateUserLastName" id="userLastName" value="<?= $arrayUser['lastName'] ?>">
             <label for="userFirstName">Prénom</label>
             <input type="text" name="updateUserFirstName" id="userFirstName" value="<?= $arrayUser['firstName'] ?>">
+            <label for="userLastName">Nom de famille</label>
+            <input type="text" name="updateUserLastName" id="userLastName" value="<?= $arrayUser['lastName'] ?>">
+            <option value="<?= $arrayUser['updateUserId'] ?>" selected disabled>
+                    <?php
+                    $userRole = getByIdUser($arrayUser['updateUserId']);
+                    echo $userRole['role'];
+                    ?>
+                </option>
             <button type="submit" name="updateUser">Modifier</button>
         </form>
     </section>

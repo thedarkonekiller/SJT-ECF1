@@ -14,10 +14,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside
             <input type="email" name="addEmail" id="userEmail">
             <label for="userPassword">Mot de passe</label>
             <input type="password" name="addPassword" id="userPassword">
-            <label for="userLastName">Nom de famille</label>
-            <input type="text" name="addLastName" id="userLastName">
             <label for="userFirstName">Prénom</label>
             <input type="text" name="addFirstName" id="userFirstName">
+            <label for="userLastName">Nom de famille</label>
+            <input type="text" name="addLastName" id="userLastName">
             <button type="submit" name="addUserBo">Ajouter</button>
         </form>
     </section>
@@ -28,8 +28,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside
                 <tr>
                     <th>Pseudo</th>
                     <th>Email</th>
-                    <th>Nom de famille</th>
                     <th>Prénom</th>
+                    <th>Nom de famille</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -40,8 +40,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/webfiles/views/_included/_admin_aside
                     <tr>
                         <td><?= $result['username']; ?></td>
                         <td><?= $result['email']; ?></td>
-                        <td><?= $result['lastName']; ?></td>
                         <td><?= $result['firstName']; ?></td>
+                        <td><?= $result['lastName']; ?></td>
                         <td><?= $result['role']; ?></td>
                         <td class="flex">
                             <form action="/webfiles/views/admin/user/modify.php" method="POST">
