@@ -15,7 +15,7 @@
             <input type="text" name="addLastName" id="userLastName">
             <label for="userFirstName">Prénom</label>
             <input type="text" name="addFirstName" id="userFirstName">
-            <button type="submit" name="addUserBO">Ajouter</button>
+            <button type="submit" name="addUserBo">Ajouter</button>
         </form>
     </section>
     <section class="admArray">
