@@ -281,6 +281,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             RedirectToURL('/webfiles/views/admin/index.php', 5);
         }
     }
+}
 
 
 
